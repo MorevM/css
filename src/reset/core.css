@@ -34,14 +34,6 @@
 }
 
 /**
- * Keep placeholder text opacity under the design system
- * instead of browser defaults (Firefox sets to 0.5).
- */
-::placeholder {
-	opacity: 1;
-}
-
-/**
  * Make links inherit surrounding text styling.
  */
 :where(a) {
