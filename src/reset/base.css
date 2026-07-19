@@ -127,6 +127,13 @@
 }
 
 /**
+ * Chromium does not propagate the input cursor to its file picker button.
+ */
+:where(input[type='file']:not(:disabled))::file-selector-button {
+	cursor: pointer;
+}
+
+/**
  * Prevent long words from breaking text layouts.
  */
 :where(p, h1, h2, h3, h4, h5, h6) {
