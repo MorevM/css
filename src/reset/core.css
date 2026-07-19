@@ -71,6 +71,13 @@
 }
 
 /**
+ * Prevent document-like embedded content from overflowing.
+ */
+:where(embed, iframe, object) {
+	max-inline-size: 100%;
+}
+
+/**
  * Remove the inline gap around image-like content.
  */
 :where(picture, img) {
