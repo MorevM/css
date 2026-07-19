@@ -112,7 +112,7 @@
 /**
  * Remove list markers while keeping list semantics intact.
  */
-:where(ul, ol) {
+:where(ul, ol, menu) {
 	list-style-type: '';
 }
 
