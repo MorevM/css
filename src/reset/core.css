@@ -84,6 +84,23 @@
 }
 
 /**
+ * Remove dialog chrome.
+ */
+:where(dialog) {
+	color: inherit;
+	background: none;
+	border: 0;
+	box-shadow: none;
+}
+
+/**
+ * Leave dialog backdrop presentation to the design system.
+ */
+:where(dialog)::backdrop {
+	background: none;
+}
+
+/**
  * Keep embedded media responsive inside its container.
  */
 :where(audio, canvas, img, svg, video) {
