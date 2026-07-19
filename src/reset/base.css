@@ -178,3 +178,10 @@
 	outline: 4px solid Highlight; /* 1 */
 	outline-offset: 4px; /* 2 */
 }
+
+/**
+ * Keep long preformatted lines inside their container.
+ */
+:where(pre) {
+	overflow: auto;
+}
