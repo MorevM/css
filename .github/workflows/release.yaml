@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags: [v*]
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup environment
+        uses: ./.github/actions/setup
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Spellcheck
+        run: pnpm spellcheck
+
+      - name: Build
+        run: pnpm build
+
+      - name: Linting
+        run: pnpm lint
+
+      - name: Testing
+        run: pnpm test
+
+      - name: Getting latest changelog entry
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        id: latest-changelog-entry
+        with:
+          result-encoding: string
+          script: |
+            const { readFileSync } = require('node:fs');
+
+            const contents = readFileSync('CHANGELOG.md', { encoding: 'utf8' });
+            const m = contents.match(/^##[^\n\r]+\r?\n(.*?)(?=^##\s|(?!.))/ms);
+
+            return m?.[1].trim() ?? 'Failed to extract latest changelog entry';
+
+      - name: Create release
+        uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836 # v2.3.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          body: ${{steps.latest-changelog-entry.outputs.result}}
+
+      - name: Publish package
+        run: pnpm publish --provenance --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: '' # Explicitly clear placeholder set by setup-node to enable OIDC

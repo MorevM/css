@@ -1,0 +1,30 @@
+# Artifacts
+dist
+
+# Editors
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+
+# Dependencies
+node_modules
+
+# Coverage
+coverage
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Log Files
+*.log
+npm-debug.log*
+
+# Misc
+todo
+.tmp
+temp

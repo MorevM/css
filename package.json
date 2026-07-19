@@ -1,0 +1,71 @@
+{
+	"name": "@morev/css",
+	"description": "Template repository to start projects with",
+	"type": "module",
+	"private": true,
+	"version": "0.0.0",
+	"engines": {
+		"node": ">=24"
+	},
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
+	"author": {
+		"name": "Maxim Morev",
+		"email": "max.seainside@gmail.com"
+	},
+	"homepage": "https://github.com/MorevM/template-repository#readme",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/MorevM/template-repository"
+	},
+	"keywords": [],
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"scripts": {
+		"prepare": "lefthook install",
+		"test": "vitest",
+		"test:dev": "vitest --watch",
+		"typecheck": "tsc --noEmit",
+		"spellcheck": "cspell --no-progress --no-must-find-files --show-suggestions --unique",
+		"lint": "pnpm lint:eslint && pnpm lint:stylelint",
+		"lint:fix": "pnpm lint:eslint:fix && pnpm lint:stylelint:fix",
+		"lint:eslint": "eslint .",
+		"lint:eslint:fix": "eslint . --fix",
+		"lint:stylelint": "stylelint \"**/*.{css,scss}\" --allow-empty-input",
+		"lint:stylelint:fix": "stylelint \"**/*.{css,scss}\" --fix --allow-empty-input",
+		"build": "tsdown",
+		"release": "release-it --disable-metrics"
+	},
+	"dependencies": {
+		"@morev/utils": "^3.15.0"
+	},
+	"devDependencies": {
+		"@cspell/dict-ru_ru": "^2.3.2",
+		"@morev/commitlint-config": "^0.2.2",
+		"@morev/eslint-config": "^42.0.2",
+		"@morev/stylelint-config": "^9.0.2",
+		"@release-it/conventional-changelog": "^8.0.1",
+		"@types/node": "^24.12.2",
+		"cspell": "^10.0.1",
+		"eslint": "10.7.0",
+		"lefthook": "^2.1.10",
+		"release-it": "^20.2.1",
+		"stylelint": "^17.14.0",
+		"tsdown": "^0.22.9",
+		"typescript": "^6.0.3",
+		"vitest": "^4.1.10"
+	}
+}
