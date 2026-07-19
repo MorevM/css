@@ -191,7 +191,13 @@
 
 /**
  * Remove number field spin controls.
+ * Firefox keeps them with `appearance: none` and requires `textfield`.
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=1786154
  */
+:where(input[type='number']) {
+	appearance: textfield;
+}
+
 :where(input)::-webkit-inner-spin-button {
 	appearance: none;
 }
