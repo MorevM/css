@@ -190,6 +190,24 @@
 }
 
 /**
+ * Hide date and time picker indicators where browsers expose them.
+ * This also removes the native UI trigger; provide one using `showPicker()`.
+ * Firefox does not provide an author-facing pseudo-element.
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=1830890
+ */
+:where(
+	input:is(
+		[type='date'],
+		[type='datetime-local'],
+		[type='month'],
+		[type='time'],
+		[type='week']
+	)
+)::-webkit-calendar-picker-indicator {
+	display: none;
+}
+
+/**
  * Remove number field spin controls.
  * Firefox keeps them with `appearance: none` and requires `textfield`.
  * https://bugzilla.mozilla.org/show_bug.cgi?id=1786154
