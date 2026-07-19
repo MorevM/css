@@ -65,7 +65,7 @@
 /**
  * Keep embedded media responsive inside its container.
  */
-:where(audio, img, svg, video) {
+:where(audio, canvas, img, svg, video) {
 	max-inline-size: 100%;
 	block-size: auto;
 }
