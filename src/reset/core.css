@@ -63,6 +63,27 @@
 }
 
 /**
+ * Reset the fully styleable button inside file inputs.
+ */
+::file-selector-button {
+	box-sizing: border-box;
+	inline-size: auto;
+	margin: 0;
+	padding: 0;
+	color: inherit;
+	font: inherit;
+	letter-spacing: inherit;
+	text-align: inherit;
+	text-indent: 0;
+	text-transform: inherit;
+	word-spacing: inherit;
+	background: none;
+	border: 0;
+	box-shadow: none;
+	appearance: none;
+}
+
+/**
  * Keep embedded media responsive inside its container.
  */
 :where(audio, canvas, img, svg, video) {
