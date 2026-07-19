@@ -190,6 +190,34 @@
 }
 
 /**
+ * Normalize browser-specific pixel dimensions to a neutral square.
+ * Chromium uses 50x27px; Firefox uses 64x32px.
+ * https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/core/html/resources/html.css
+ * https://searchfox.org/firefox-main/source/layout/style/res/forms.css#508-512
+ */
+:where(input[type='color']) {
+	inline-size: 24px;
+	block-size: 24px;
+}
+
+/**
+ * Remove browser-provided spacing and borders around color swatches.
+ * Keep vendor pseudo-elements in separate rules: an unsupported
+ * pseudo-element invalidates the entire selector list.
+ */
+:where(input[type='color'])::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+
+:where(input[type='color'])::-webkit-color-swatch {
+	border: 0;
+}
+
+:where(input[type='color'])::-moz-color-swatch {
+	border: 0;
+}
+
+/**
  * Hide date and time picker indicators where browsers expose them.
  * This also removes the native UI trigger; provide one using `showPicker()`.
  * Firefox does not provide an author-facing pseudo-element.
