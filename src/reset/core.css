@@ -163,6 +163,18 @@
 }
 
 /**
+ * Keep hidden embeds rendered as zero-sized inline boxes.
+ * Firefox currently misses the zero-size UA styles.
+ * https://html.spec.whatwg.org/multipage/rendering.html#hidden-elements
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=1852037
+ */
+:where(embed[hidden]) {
+	display: inline flow;
+	inline-size: 0;
+	block-size: 0;
+}
+
+/**
  * Make horizontal rules simple one-pixel separators.
  */
 :where(hr) {
