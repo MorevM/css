@@ -14,9 +14,9 @@
 }
 
 /**
- * Let form controls blend into surrounding typography.
+ * Let form controls and indicators blend into surrounding typography.
  */
-:where(input, button, textarea, select) {
+:where(input, button, textarea, select, progress, meter) {
 	color: inherit;
 	font: inherit;
 	letter-spacing: inherit;
@@ -32,6 +32,44 @@
 	border-radius: 0;
 	box-shadow: none;
 	appearance: none;
+}
+
+/**
+ * Remove progress and meter chrome.
+ */
+:where(progress, meter) {
+	vertical-align: baseline;
+	background: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	appearance: none;
+}
+
+/**
+ * Remove browser-specific track and value painting that remains after
+ * `appearance: none`. Keep WebKit and Firefox pseudo-elements separate.
+ * https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/core/html/resources/html.css
+ * https://searchfox.org/firefox-main/source/layout/style/res/forms.css#1197-1324
+ */
+:where(progress)::-webkit-progress-bar,
+:where(progress)::-webkit-progress-value,
+:where(meter)::-webkit-meter-bar,
+:where(meter)::-webkit-meter-optimum-value,
+:where(meter)::-webkit-meter-suboptimum-value,
+:where(meter)::-webkit-meter-even-less-good-value {
+	background: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+:where(progress)::-moz-progress-bar,
+:where(meter)::-moz-meter-bar {
+	background: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
 }
 
 /**
