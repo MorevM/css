@@ -155,6 +155,17 @@
 }
 
 /**
+ * Remove the disclosure marker without changing details open/closed behavior.
+ */
+:where(summary) {
+	list-style: none;
+}
+
+:where(summary)::-webkit-details-marker {
+	display: none;
+}
+
+/**
  * Preserve the native hidden behavior,
  * but keep `until-found` searchable.
  * https://html.spec.whatwg.org/multipage/rendering.html#hidden-elements
