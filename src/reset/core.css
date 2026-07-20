@@ -239,3 +239,31 @@
 :where(input)::-webkit-inner-spin-button {
 	appearance: none;
 }
+
+/**
+ * Normalize browser-specific range slider thumbs to 16x16px.
+ * Chromium uses 16px in its native theme; Firefox uses 1em plus a border.
+ * Keep vendor pseudo-elements in separate rules because an unsupported
+ * pseudo-element invalidates the entire selector list.
+ * https://chromium.googlesource.com/chromium/src/+/refs/heads/main/ui/native_theme/native_theme_base.cc#46
+ * https://searchfox.org/firefox-main/source/layout/style/res/forms.css#758-777
+ */
+:where(input[type='range'])::-webkit-slider-thumb {
+	inline-size: 16px;
+	block-size: 16px;
+	background: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	appearance: none;
+}
+
+:where(input[type='range'])::-moz-range-thumb {
+	inline-size: 16px;
+	block-size: 16px;
+	background: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	appearance: none;
+}
