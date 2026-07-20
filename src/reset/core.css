@@ -29,6 +29,7 @@
 :where(input, textarea, select) {
 	background: none;
 	border: none;
+	border-radius: 0;
 	box-shadow: none;
 	appearance: none;
 }
