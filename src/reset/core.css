@@ -24,6 +24,16 @@
 }
 
 /**
+ * Reset placeholder opacity in older Firefox releases.
+ * Firefox 132 (29 October 2024) moved the faded appearance into `color`.
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=1470025
+ */
+::placeholder {
+	/* TODO(2027-04-29): Remove when Firefox 132 (29 October 2024) behavior is Baseline Widely Available. */
+	opacity: 1;
+}
+
+/**
  * Remove native field chrome.
  */
 :where(input, textarea, select) {
