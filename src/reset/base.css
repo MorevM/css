@@ -10,12 +10,17 @@
  * Establish document-wide typography and platform behavior.
  * 1. Use the system UI font stack.
  * 2. Set a readable default line height.
- * 3. Improve font smoothing in WebKit browsers.
- * 4. Improve font smoothing in Firefox on macOS.
+ * 3. Use the non-standard WebKit/Blink font-smoothing API on macOS; it has no unprefixed equivalent.
+ *    https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-smooth
+ * 4. Use the non-standard Firefox font-smoothing API on macOS; it has no unprefixed equivalent.
+ *    https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-smooth
  * 5. Ask the browser to prioritize legibility.
  * 6. Make tab stops compact in preformatted content (default is 8).
- * 7. Remove the tap highlight color.
- * 8-9. Prevent mobile font inflation in WebKit browsers.
+ * 7. Remove the iOS Safari tap highlight through its non-standard API; it has no unprefixed equivalent.
+ *    https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariCSSRef/
+ * 8. Prevent mobile font inflation in iOS Safari. Safari 26.5 (11 May 2026) still requires the prefixed property.
+ *    https://bugs.webkit.org/show_bug.cgi?id=229086
+ * 9. Apply the same policy through the standard property where supported.
  */
 :where(:root) {
 	font-family: system-ui, sans-serif; /* 1 */
@@ -55,7 +60,8 @@
 /**
  * Prevent accidental text selection on elements that behave like commands.
  * 1. Disable selection in standard browsers.
- * 2. Disable the long-press callout in WebKit browsers.
+ * 2. Disable the long-press callout through iOS Safari's non-standard API; it has no unprefixed equivalent.
+ *    https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariCSSRef/
  */
 :where(
 	button,
