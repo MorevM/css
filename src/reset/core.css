@@ -229,9 +229,12 @@
 }
 
 /**
- * Remove the disclosure marker without changing details open/closed behavior.
+ * Normalize disclosure layout before Safari 18.4 (31 March 2025),
+ * then remove its marker without changing details open/closed behavior.
  */
 :where(summary) {
+	/* TODO(2027-10-01): Remove when Safari 18.4 (31 March 2025) behavior is Baseline Widely Available. */
+	display: block flow list-item;
 	list-style: none;
 }
 
