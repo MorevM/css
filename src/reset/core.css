@@ -213,6 +213,15 @@
 }
 
 /**
+ * Match the HTML default before Chrome 135 (1 April 2025)
+ * and Safari 26 (15 September 2025).
+ */
+:where(b, strong) {
+	/* TODO(2028-03-15): Remove when Safari 26 (15 September 2025) behavior is Baseline Widely Available. */
+	font-weight: bolder;
+}
+
+/**
  * Remove list markers while keeping list semantics intact.
  */
 :where(ul, ol, menu) {
