@@ -25,7 +25,6 @@
 	text-rendering: optimizeLegibility; /* 5 */
 	tab-size: 2; /* 6 */
 	-webkit-tap-highlight-color: transparent; /* 7 */
-	/* stylelint-disable-next-line property-no-vendor-prefix -- TODO: Safari still needs this prefixed property. */
 	-webkit-text-size-adjust: 100%; /* 8 */
 	text-size-adjust: 100%; /* 9 */
 }
@@ -148,8 +147,8 @@
 }
 
 /**
- * Balance heading lines to avoid lonely words
- * on a separate line.
+ * Balance heading lines to avoid
+ * lonely words on a separate line.
  */
 :where(h1, h2, h3, h4, h5, h6) {
 	text-wrap: balance;
