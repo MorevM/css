@@ -169,9 +169,9 @@
 }
 
 /**
- * Prevent document-like embedded content from overflowing.
+ * Prevent embedded documents and form controls from overflowing.
  */
-:where(embed, iframe, object) {
+:where(embed, iframe, input, object, select, textarea) {
 	max-inline-size: 100%;
 }
 
