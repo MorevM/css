@@ -176,10 +176,16 @@
 
 /**
  * Normalize table borders and cell spacing.
+ * Safari before 18.4 (31 March 2025) and
+ * Chromium before Chrome 149 (2 June 2026)
+ * use a gray UA border color.
  */
 :where(table) {
 	border-collapse: collapse;
 	border-spacing: 0;
+
+	/* TODO(2028-12-02): Remove when Chrome 149 (2 June 2026) behavior is Baseline Widely Available. */
+	border-color: currentColor;
 }
 
 /**
