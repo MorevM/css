@@ -24,6 +24,14 @@
 }
 
 /**
+ * Reset iOS WebKit's reduced opacity for disabled controls.
+ * https://github.com/WebKit/WebKit/blob/9dd0abc261828479fac8134d26d7138b962df5a3/Source/WebCore/css/html.css#L938-L947
+ */
+:where(input:disabled, textarea:disabled) {
+	opacity: 1;
+}
+
+/**
  * Reset placeholder opacity in older Firefox releases.
  * Firefox 132 (29 October 2024) moved the faded appearance into `color`.
  * https://bugzilla.mozilla.org/show_bug.cgi?id=1470025
