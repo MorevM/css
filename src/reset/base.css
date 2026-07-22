@@ -21,6 +21,8 @@
  * 8. Prevent mobile font inflation in iOS Safari. Safari 26.5 (11 May 2026) still requires the prefixed property.
  *    https://bugs.webkit.org/show_bug.cgi?id=229086
  * 9. Apply the same policy through the standard property where supported.
+ * 10. Keep unbroken content inside its container by default.
+ *     Components requiring an intact line must opt into their own overflow policy.
  */
 :where(:root) {
 	font-family: system-ui, sans-serif; /* 1 */
@@ -32,6 +34,7 @@
 	-webkit-tap-highlight-color: transparent; /* 7 */
 	-webkit-text-size-adjust: 100%; /* 8 */
 	text-size-adjust: 100%; /* 9 */
+	overflow-wrap: break-word; /* 10 */
 }
 
 /**
@@ -170,13 +173,6 @@
  */
 :where(input[type='file']:not(:disabled))::file-selector-button {
 	cursor: pointer;
-}
-
-/**
- * Prevent long words from breaking text layouts.
- */
-:where(p, h1, h2, h3, h4, h5, h6) {
-	overflow-wrap: break-word;
 }
 
 /**
