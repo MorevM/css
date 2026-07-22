@@ -345,6 +345,11 @@
 	appearance: textfield;
 }
 
+/*
+ * The alternative outer stepper was removed
+ * in Chrome 14 (16 September 2011) and Safari 6 (25 July 2012).
+ * https://bugs.webkit.org/show_bug.cgi?id=61845
+ */
 :where(input)::-webkit-inner-spin-button {
 	appearance: none;
 }
