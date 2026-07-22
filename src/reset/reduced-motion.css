@@ -16,3 +16,21 @@
 		animation-iteration-count: 1 !important;
 	}
 }
+
+/**
+ * Restrict motion in the browser-generated View Transition tree.
+ * https://drafts.csswg.org/css-view-transitions-1/#view-transition-pseudo-tree
+ */
+:root::view-transition,
+:root::view-transition-group(*),
+:root::view-transition-image-pair(*),
+:root::view-transition-old(*),
+:root::view-transition-new(*) {
+	@media (prefers-reduced-motion: reduce) {
+		transition-duration: .01ms !important;
+		transition-delay: .01ms !important;
+		animation-duration: .01ms !important;
+		animation-delay: .01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}
