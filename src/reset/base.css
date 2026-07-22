@@ -112,6 +112,14 @@
 }
 
 /**
+ * Use an explicit small-print scale instead of the UA-defined `smaller` step.
+ * This keeps the typographic ratio predictable across contexts.
+ */
+:where(small) {
+	font-size: 80%;
+}
+
+/**
  * Keep superscript and subscript compact with predictable baseline offsets.
  * 1. Replace browser-defined sub/super positioning with fixed logical offsets.
  *    Without it, super/sub can expand lines at parent line-height up to about .7.
