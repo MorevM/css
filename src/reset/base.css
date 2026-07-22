@@ -99,13 +99,26 @@
 }
 
 /**
- * Keep superscript and subscript compact without affecting line height.
- * 1. Scale inline annotations down (default is .83em that is too big).
- * 2. Prevent annotations from expanding the line box.
+ * Keep superscript and subscript compact with predictable baseline offsets.
+ * 1. Replace browser-defined sub/super positioning with fixed logical offsets.
+ *    Without it, super/sub can expand lines at parent line-height up to about .7.
+ * 2. Scale inline annotations down (default is .83em that is too big).
+ * 3. Minimize their contribution to the line box.
+ *    A small contribution remains when the parent line-height is .2 or lower.
  */
 :where(sup, sub) {
-	font-size: .75em; /* 1 */
-	line-height: 0; /* 2 */
+	position: relative; /* 1 */
+	vertical-align: baseline; /* 1 */
+	font-size: .75em; /* 2 */
+	line-height: 0; /* 3 */
+}
+
+:where(sub) {
+	inset-block-end: -.25em;
+}
+
+:where(sup) {
+	inset-block-start: -.5em;
 }
 
 /**
