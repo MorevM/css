@@ -1,11 +1,17 @@
 /**
- * Shorten motion for users who request reduced animation.
+ * Restrict motion for users who request it.
+ * 1. Remove scroll-linked movement from fixed backgrounds.
+ * 2. Disable smooth scrolling, including in nested containers.
+ * 3. Shorten transitions.
+ * 4. Shorten animations to a single iteration.
  */
 *, ::before, ::after, ::marker, ::backdrop {
 	@media (prefers-reduced-motion: reduce) {
-		transition-duration: .01ms !important;
+		background-attachment: initial !important; /* 1 */
+		scroll-behavior: auto !important; /* 2 */
+		transition-duration: .01ms !important; /* 3 */
 		transition-delay: .01ms !important;
-		animation-duration: .01ms !important;
+		animation-duration: .01ms !important; /* 4 */
 		animation-delay: .01ms !important;
 		animation-iteration-count: 1 !important;
 	}
