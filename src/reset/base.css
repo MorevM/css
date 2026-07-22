@@ -38,6 +38,18 @@
 }
 
 /**
+ * Normalize monospace typography.
+ * 1. Prefer the platform UI monospace and fall back to the user-configured generic.
+ *    https://bugzilla.mozilla.org/show_bug.cgi?id=1598881
+ * 2. Avoid the smaller fixed-width size applied to an exact `monospace`.
+ *    https://bugzilla.mozilla.org/show_bug.cgi?id=175415
+ *    https://bugs.webkit.org/show_bug.cgi?id=19161
+ */
+:where(code, kbd, samp, pre) {
+	font-family: ui-monospace, monospace; /* 1, 2 */
+}
+
+/**
  * Keep controls from becoming taller than surrounding interactive UI.
  */
 :where(button, input, select, textarea, option, optgroup) {
