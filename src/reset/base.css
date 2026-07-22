@@ -42,6 +42,19 @@
 }
 
 /**
+ * Give placeholders consistent theme-relative contrast.
+ * Chromium uses #757575:
+ * https://github.com/chromium/chromium/blob/3cc2f39/third_party/blink/renderer/core/html/resources/html.css#L613-L615
+ * Firefox mixes currentColor at 54% in sRGB:
+ * https://github.com/mozilla-firefox/firefox/blob/bd3f43d/layout/style/res/forms.css#L172-L175
+ * WebKit uses darkgray:
+ * https://github.com/WebKit/WebKit/blob/a47f597/Source/WebCore/css/html.css#L740-L742
+ */
+::placeholder {
+	color: color-mix(in oklab, currentColor 50%, transparent);
+}
+
+/**
  * Enable document-level interaction polish while respecting reduced motion.
  * 1. Smooth in-page navigation by default.
  * 2. Allow transitions to and from intrinsic size keywords.
