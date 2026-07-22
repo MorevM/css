@@ -291,6 +291,39 @@
 }
 
 /**
+ * Normalize editable date and time fields after removing native chrome.
+ * 1. Keep empty iOS fields at least one line tall.
+ * 2. Honor non-start alignment in iOS Safari, though it is uncommon for text fields.
+ * 3. Remove internal block padding that survives the universal spacing reset.
+ *
+ * Keep the UA display unchanged: `inline-flex` regresses Chromium alignment.
+ *
+ * Do not compensate for iOS Safari making a styled date input 1px shorter than an equivalent text input.
+ * Desktop has no mismatch, so a shadow-tree `+1px` would regress it;
+ * exact host sizing belongs to component styles.
+ *
+ * https://bugs.webkit.org/show_bug.cgi?id=198959
+ * https://github.com/WebKit/WebKit/blob/9dd0abc261828479fac8134d26d7138b962df5a3/Source/WebCore/css/html.css#L509-L547
+ */
+:where(input)::-webkit-date-and-time-value {
+	min-block-size: 1lh; /* 1 */
+	text-align: inherit; /* 2 */
+}
+
+:where(input)::-webkit-datetime-edit-fields-wrapper,
+:where(input)::-webkit-datetime-edit,
+:where(input)::-webkit-datetime-edit-year-field,
+:where(input)::-webkit-datetime-edit-month-field,
+:where(input)::-webkit-datetime-edit-day-field,
+:where(input)::-webkit-datetime-edit-hour-field,
+:where(input)::-webkit-datetime-edit-minute-field,
+:where(input)::-webkit-datetime-edit-second-field,
+:where(input)::-webkit-datetime-edit-millisecond-field,
+:where(input)::-webkit-datetime-edit-meridiem-field {
+	padding-block: 0; /* 3 */
+}
+
+/**
  * Normalize browser-specific pixel dimensions to a neutral square.
  * Chromium uses 50x27px; Firefox uses 64x32px.
  * https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/core/html/resources/html.css
