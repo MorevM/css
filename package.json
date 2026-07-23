@@ -50,6 +50,7 @@
 	},
 	"scripts": {
 		"prepare": "lefthook install",
+		"playground": "vite --host --open /playground/",
 		"test": "vitest",
 		"test:dev": "vitest --watch",
 		"typecheck": "tsc --noEmit",

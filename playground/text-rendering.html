@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Text rendering benchmark · @morev/css playground</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display&amp;display=block"
+		/>
+		<link rel="stylesheet" href="./text-rendering.css" />
+		<script type="module" src="./text-rendering.js"></script>
+		<meta
+			name="description"
+			content="Compare the rendering cost of optimizeLegibility and optimizeSpeed on a large text corpus."
+		/>
+	</head>
+	<body>
+		<header class="lab-header">
+			<div>
+				<p class="lab-header__eyebrow">@morev/css playground</p>
+				<h1 class="lab-header__title">Text rendering benchmark</h1>
+				<p class="lab-header__description">
+					The same text, font, width, and markup rendered with
+					<code>text-rendering: optimizeLegibility</code>
+					and
+					<code>text-rendering: optimizeSpeed</code>
+					.
+				</p>
+			</div>
+			<a
+				class="button button--secondary"
+				href="./index.html"
+			>Back to reset playground</a>
+		</header>
+
+		<main>
+			<section class="benchmark-panel" aria-labelledby="benchmark-title">
+				<div>
+					<p class="section-eyebrow">Repeatable measurement</p>
+					<h2 id="benchmark-title">Render an identical large corpus</h2>
+					<p>
+						Each recorded run inserts fresh text into the same visible measurement area,
+						then reads its geometry to force text shaping and layout. The order alternates,
+						and every pair receives identical but newly identified text to reduce cache and
+						first-run bias.
+					</p>
+				</div>
+
+				<div class="benchmark-controls">
+					<label>
+						Paragraphs
+						<input
+							id="paragraph-count"
+							type="number"
+							min="100"
+							max="2000"
+							step="100"
+							value="2000"
+						/>
+					</label>
+					<label>
+						Recorded runs
+						<input
+							id="run-count"
+							type="number"
+							min="3"
+							max="15"
+							step="1"
+							value="10"
+						/>
+					</label>
+					<button
+						id="run-benchmark"
+						class="button"
+						type="button"
+					>Run benchmark</button>
+				</div>
+
+				<p
+					id="benchmark-status"
+					class="benchmark-status"
+					role="status"
+					aria-live="polite"
+				>
+					Ready. The benchmark can briefly load the CPU; start it when convenient.
+				</p>
+
+				<div class="results-table-wrapper">
+					<table class="results-table">
+						<thead>
+							<tr>
+								<th scope="col">Mode</th>
+								<th scope="col">Computed value</th>
+								<th scope="col">Style + shaping + layout</th>
+								<th scope="col">Probe width</th>
+								<th scope="col">Rendered height</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">
+									<code>optimizeLegibility</code>
+								</th>
+								<td id="legibility-computed">—</td>
+								<td id="legibility-layout">—</td>
+								<td id="legibility-probe">—</td>
+								<td id="legibility-height">—</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<code>optimizeSpeed</code>
+								</th>
+								<td id="speed-computed">—</td>
+								<td id="speed-layout">—</td>
+								<td id="speed-probe">—</td>
+								<td id="speed-height">—</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<p id="benchmark-summary" class="benchmark-summary">
+					Results will show the median of the recorded runs.
+				</p>
+				<p class="benchmark-note">
+					This intentionally measures synchronous style, shaping, and layout only. Page
+					JavaScript cannot reliably time Paint or Rasterize Paint; use the isolated pages
+					below for those events.
+				</p>
+
+				<div class="devtools-panel">
+					<div>
+						<h3>Inspect rendering in DevTools</h3>
+						<p>
+							Open each mode in its own tab. Start a Performance recording, then click
+							“Re-render corpus”; scroll through the page to exercise painting of
+							off-screen text.
+						</p>
+					</div>
+					<div class="devtools-panel__actions">
+						<a
+							id="legibility-profile-link"
+							class="button button--secondary"
+							href="./text-rendering-legibility.html?paragraphs=2000"
+							target="_blank"
+						>Open optimizeLegibility page</a>
+						<a
+							id="speed-profile-link"
+							class="button button--secondary"
+							href="./text-rendering-speed.html?paragraphs=2000"
+							target="_blank"
+						>Open optimizeSpeed page</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="comparison" aria-labelledby="comparison-title">
+				<header class="comparison__header">
+					<p class="section-eyebrow">Large text preview</p>
+					<h2 id="comparison-title">Side-by-side output</h2>
+					<p>
+						Each column contains the same first 80 paragraphs from the measured corpus.
+					</p>
+				</header>
+
+				<div class="comparison__grid">
+					<article class="sample sample--legibility">
+						<header class="sample__header">
+							<p class="sample__mode">Legibility</p>
+							<h3>
+								<code>optimizeLegibility</code>
+							</h3>
+						</header>
+						<div id="legibility-preview" class="sample__body"></div>
+					</article>
+
+					<article class="sample sample--speed">
+						<header class="sample__header">
+							<p class="sample__mode">Speed</p>
+							<h3>
+								<code>optimizeSpeed</code>
+							</h3>
+						</header>
+						<div id="speed-preview" class="sample__body"></div>
+					</article>
+				</div>
+			</section>
+		</main>
+
+		<div
+			id="measurement-stage"
+			class="measurement-stage"
+			aria-hidden="true"
+		></div>
+	</body>
+</html>
