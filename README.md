@@ -70,5 +70,5 @@ across the Baseline browser set for at least 30 months.
 
 ## Playground
 
-The [`playground`](./playground/) compares native and reset rendering
+The [`playground`](https://morevm.github.io/css/playground/) compares native and reset rendering
 side by side and documents the behavior of every stylesheet.
