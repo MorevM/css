@@ -21,17 +21,13 @@
 					<code>core.css</code>
 					+
 					<code>base.css</code>
-					, with an optional reduced-motion layer.
+					+
+					<code>reduced-motion.css</code>
+					.
 				</p>
 			</div>
 
 			<div class="toolbar" aria-label="Playground controls">
-				<label class="toolbar__toggle">
-					<input id="motion-toggle" type="checkbox" checked />
-					Include
-					<code>reduced-motion.css</code>
-				</label>
-
 				<label class="toolbar__toggle">
 					<input id="sync-toggle" type="checkbox" checked />
 					Synchronize scrolling
@@ -75,8 +71,7 @@
 						<h2 id="reset-title" class="comparison-pane__title">@morev/css reset</h2>
 					</div>
 					<a
-						id="reset-frame-link"
-						href="./frame.html?mode=reset&amp;motion=1"
+						href="./frame.html?mode=reset"
 						target="_blank"
 					>
 						Open separately
@@ -86,7 +81,7 @@
 				<iframe
 					id="reset-frame"
 					class="comparison-pane__frame"
-					src="./frame.html?mode=reset&amp;motion=1"
+					src="./frame.html?mode=reset"
 					title="Elements rendered with the @morev/css reset"
 				></iframe>
 			</section>

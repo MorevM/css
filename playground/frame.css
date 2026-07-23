@@ -81,16 +81,14 @@
 	border: 1px solid #68727e;
 }
 
-[data-mode='reset'] :is(.badge--core, .badge--base),
-[data-motion-styles='loaded'] .badge--motion,
+[data-mode='reset'] :is(.badge--core, .badge--base, .badge--motion),
 .badge--preference {
 	color: #ffffff;
 	background: #46515d;
 	border-color: #8794a2;
 }
 
-[data-mode='native'] :is(.badge--core, .badge--base),
-[data-motion-styles='omitted'] .badge--motion {
+[data-mode='native'] :is(.badge--core, .badge--base, .badge--motion) {
 	text-decoration: line-through;
 	opacity: .42;
 }

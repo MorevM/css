@@ -4,8 +4,6 @@ const searchParameters = new URLSearchParams(window.location.search);
 const hasReset = searchParameters.get('mode') === 'reset';
 const reducedMotionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-let hasReducedMotionStyles = hasReset && searchParameters.get('motion') === '1';
-
 const renderMode = () => {
 	document.querySelector('#mode-label').textContent = hasReset
 		? 'Reset styles enabled'
@@ -13,9 +11,6 @@ const renderMode = () => {
 	document.querySelector('#preference-badge').textContent = reducedMotionPreference.matches
 		? 'OS preference: reduce'
 		: 'OS preference: no-preference';
-	document.querySelector('#motion-badge').title = hasReducedMotionStyles
-		? 'The optional stylesheet is loaded'
-		: 'The optional stylesheet is not loaded';
 };
 
 const notifyInspector = () => {
@@ -119,26 +114,6 @@ document.addEventListener('input', (event) => {
 	if (!event.target.matches('.date-time-probe')) return;
 
 	requestAnimationFrame(renderDateTimeMeasurements);
-});
-
-window.addEventListener('message', (event) => {
-	if (
-		!hasReset
-		|| event.source !== window.parent
-		|| event.origin !== window.location.origin
-		|| event.data?.type !== 'update-optional-styles'
-	) return;
-
-	hasReducedMotionStyles = event.data.motion === true;
-	document.documentElement.dataset.motionStyles = hasReducedMotionStyles ? 'loaded' : 'omitted';
-	document.querySelector('#motion-reset').disabled = !hasReducedMotionStyles;
-
-	const frameUrl = new URL(window.location.href);
-	frameUrl.searchParams.set('motion', hasReducedMotionStyles ? '1' : '0');
-	window.history.replaceState(null, '', frameUrl);
-
-	renderMode();
-	requestAnimationFrame(notifyInspector);
 });
 
 new ResizeObserver(renderDateTimeMeasurements).observe(document.documentElement);

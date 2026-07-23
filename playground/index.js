@@ -2,8 +2,6 @@
 
 const nativeFrame = document.querySelector('#native-frame');
 const resetFrame = document.querySelector('#reset-frame');
-const resetFrameLink = document.querySelector('#reset-frame-link');
-const motionToggle = document.querySelector('#motion-toggle');
 const syncToggle = document.querySelector('#sync-toggle');
 const scrollReset = document.querySelector('#scroll-reset');
 const inspector = document.querySelector('#inspector');
@@ -507,25 +505,10 @@ const wireScrollSynchronization = () => {
 	}
 };
 
-const updateOptionalStyles = () => {
-	const hasReducedMotionStyles = motionToggle.checked;
-	const resetFrameUrl = [
-		'./frame.html?mode=reset',
-		`motion=${hasReducedMotionStyles ? '1' : '0'}`,
-	].join('&');
-
-	resetFrameLink.href = resetFrameUrl;
-	resetFrame.contentWindow?.postMessage({
-		type: 'update-optional-styles',
-		motion: hasReducedMotionStyles,
-	}, window.location.origin);
-};
-
-const handleFrameLoad = ({ currentTarget }) => {
+const handleFrameLoad = () => {
 	wireScrollSynchronization();
 	scheduleAlignment();
 
-	if (currentTarget === resetFrame) updateOptionalStyles();
 	if (inspectedSpecimenIndex !== undefined) requestAnimationFrame(renderInspector);
 };
 
@@ -545,13 +528,9 @@ window.addEventListener('message', (event) => {
 
 nativeFrame.addEventListener('load', handleFrameLoad);
 resetFrame.addEventListener('load', handleFrameLoad);
-window.addEventListener('load', () => {
-	updateOptionalStyles();
-	scheduleAlignment();
-});
+window.addEventListener('load', scheduleAlignment);
 window.addEventListener('resize', scheduleAlignment);
 
-motionToggle.addEventListener('change', updateOptionalStyles);
 showUnchangedToggle.addEventListener('change', renderInspector);
 closeInspector.addEventListener('click', hideInspector);
 
