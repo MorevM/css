@@ -1,0 +1,36 @@
+name: Playground
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - .github/workflows/playground.yaml
+      - playground/**
+      - src/reset/**
+  workflow_dispatch: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  publish-playground:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Prepare playground
+        run: |
+          mkdir -p _site/src
+          cp -R playground _site/playground
+          cp -R src/reset _site/src/reset
+
+      - name: Publish to GH pages
+        uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
+        with:
+          branch: gh-pages
+          folder: _site
