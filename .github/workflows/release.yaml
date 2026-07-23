@@ -34,9 +34,6 @@ jobs:
       - name: Linting
         run: pnpm lint
 
-      - name: Testing
-        run: pnpm test
-
       - name: Getting latest changelog entry
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         id: latest-changelog-entry

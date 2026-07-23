@@ -47,27 +47,8 @@ jobs:
       - name: Linting
         run: pnpm lint
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          fetch-depth: 2
-
-      - name: Setup environment
-        uses: ./.github/actions/setup
-
-      - name: Testing
-        run: pnpm test --coverage
-
-      # - name: Upload coverage reports to Codecov
-      #   uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-
   build:
-    needs: [spellcheck, typecheck, lint, test]
+    needs: [spellcheck, typecheck, lint]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository

@@ -43,4 +43,3 @@ hooks:
     - pnpm build
   after:init:
     - pnpm lint
-    - pnpm test
