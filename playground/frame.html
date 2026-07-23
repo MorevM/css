@@ -1493,7 +1493,7 @@
 					</header>
 					<h3 class="specimen__title">Scroll-linked motion</h3>
 					<p class="specimen__description">
-						Scroll the frame to observe the fixed background. Follow the link inside the container to test nested smooth scrolling.
+						Scroll the frame to observe the fixed background. Use the button inside the container to test nested smooth scrolling.
 					</p>
 					<div class="motion-stage">
 						<div
@@ -1504,7 +1504,11 @@
 							id="motion-scroll-container"
 							class="motion-scroll-container"
 						>
-							<a href="#motion-scroll-target">Scroll to nested target</a>
+							<button
+								id="motion-scroll-trigger"
+								class="motion-scroll-container__trigger"
+								type="button"
+							>Scroll to nested target</button>
 							<strong
 								id="motion-scroll-target"
 								class="motion-scroll-container__target"

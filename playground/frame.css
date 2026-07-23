@@ -683,7 +683,18 @@
 	padding: .65rem;
 	border: 1px solid #9aa5b1;
 	overflow: auto;
+	overscroll-behavior: contain;
 	scroll-behavior: smooth;
+}
+
+.motion-scroll-container__trigger {
+	padding: 0;
+	color: #2b6cb0;
+	font: inherit;
+	text-decoration: underline;
+	background: none;
+	border: 0;
+	cursor: pointer;
 }
 
 .motion-scroll-container__target {

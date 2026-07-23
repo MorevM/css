@@ -105,6 +105,21 @@ if (canvasContext) {
 	canvasContext.fillText('canvas 360 × 120', canvas.width / 2, 68);
 }
 
+const motionScrollContainer = document.querySelector('#motion-scroll-container');
+const motionScrollTarget = document.querySelector('#motion-scroll-target');
+
+document.querySelector('#motion-scroll-trigger').addEventListener('click', () => {
+	const containerRectangle = motionScrollContainer.getBoundingClientRect();
+	const targetRectangle = motionScrollTarget.getBoundingClientRect();
+
+	motionScrollContainer.scrollTo({
+		top: motionScrollContainer.scrollTop
+			+ targetRectangle.top
+			- containerRectangle.top
+			- motionScrollContainer.clientTop,
+	});
+});
+
 reducedMotionPreference.addEventListener('change', () => {
 	renderMode();
 	notifyInspector();
