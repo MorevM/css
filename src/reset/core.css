@@ -162,9 +162,14 @@
 
 /**
  * Keep embedded media responsive inside its container.
+ * Audio retains its UA block size because its native controls
+ * do not provide a reliable intrinsic height in every browser.
  */
 :where(audio, canvas, img, svg, video) {
 	max-inline-size: 100%;
+}
+
+:where(canvas, img, svg, video) {
 	block-size: auto;
 }
 
