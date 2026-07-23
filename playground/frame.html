@@ -17,12 +17,6 @@
 			disabled
 		/>
 		<link
-			id="controls-reset"
-			rel="stylesheet"
-			href="../src/reset/controls.css"
-			disabled
-		/>
-		<link
 			id="motion-reset"
 			rel="stylesheet"
 			href="../src/reset/reduced-motion.css"
@@ -54,7 +48,6 @@
 			<div class="frame-header__badges" aria-label="Loaded stylesheets">
 				<span id="core-badge" class="badge badge--core">core.css</span>
 				<span id="base-badge" class="badge badge--base">base.css</span>
-				<span id="controls-badge" class="badge badge--controls">controls.css</span>
 				<span
 					id="motion-badge"
 					class="badge badge--motion"
@@ -281,10 +274,10 @@
 						<span class="status status--affected">Affected</span>
 						<code>input, button, textarea, select, ::placeholder</code>
 					</header>
-					<h3 class="specimen__title">Form inheritance and optional affordances</h3>
+					<h3 class="specimen__title">Form inheritance and neutralization</h3>
 					<p class="specimen__description">
 						Core makes controls inherit surrounding typography. Base gives placeholders consistent theme-relative
-						contrast. Controls adds one-pixel boundaries without restoring button padding, backgrounds or radii.
+						contrast, while native control presentation remains neutralized for the design system.
 					</p>
 					<div class="specimen__stage typography-context">
 						<input id="text-control" type="text" placeholder="Text placeholder" />
@@ -351,13 +344,12 @@
 				<article class="specimen">
 					<header class="specimen__header">
 						<span class="status status--affected">Affected</span>
-						<code>controls.css: input, textarea, select</code>
+						<code>input types</code>
 					</header>
 					<h3 class="specimen__title">Input type matrix</h3>
 					<p class="specimen__description">
-						Text fields and selects receive a one-pixel boundary. Checkboxes and radios keep their native appearance and
-						use the current text color as their accent. Browser-specific search, picker and spinner mechanics remain
-						neutralized, while range controls return entirely to the browser. Small
+						Core removes native control presentation and neutralizes browser-specific search, picker, spinner, color and
+						range surfaces. Small
 						fields use a playground-only 16px floor on coarse pointers to prevent focus zoom while testing.
 					</p>
 					<div class="input-matrix">
@@ -485,7 +477,7 @@
 				<article class="specimen">
 					<header class="specimen__header">
 						<span class="status status--affected">Affected</span>
-						<code>core.css: a; controls.css: button</code>
+						<code>a, button</code>
 					</header>
 					<h3 class="specimen__title">Links and buttons</h3>
 					<div class="specimen__stage inheritance-demo">
@@ -511,7 +503,7 @@
 					</header>
 					<h3 class="specimen__title">File selector button</h3>
 					<p class="specimen__description">
-						The standardized button surface inherits typography and receives only a one-pixel boundary.
+						The standardized button surface inherits typography while its native presentation is neutralized.
 					</p>
 					<div class="specimen__stage typography-context">
 						<input id="reset-file-control" type="file" />
@@ -837,8 +829,8 @@
 					</header>
 					<h3 class="specimen__title">Disclosure and indicator surfaces</h3>
 					<p class="specimen__description">
-						Controls restores the disclosure marker. Progress and meter retain their values and states, but remain
-						neutralized for the design system.
+						Core removes the disclosure marker. Progress and meter retain their values and states, but remain neutralized
+						for the design system.
 					</p>
 					<div class="specimen__stage specimen__stage--columns">
 						<details open>
@@ -912,8 +904,8 @@
 					</header>
 					<h3 class="specimen__title">Dialog surface and placement</h3>
 					<p class="specimen__description">
-						Open the dialog in both panes, then toggle its dynamic content. Controls restores only the popup and backdrop
-						backgrounds; placement, border and shadow remain reset, so dynamic content does not recenter the dialog.
+						Open the dialog in both panes, then toggle its dynamic content. Core removes the popup and backdrop
+						presentation without changing native placement, so dynamic content does not recenter the dialog.
 					</p>
 					<div class="specimen__stage">
 						<button

@@ -82,7 +82,6 @@
 }
 
 [data-mode='reset'] :is(.badge--core, .badge--base),
-[data-controls-styles='loaded'] .badge--controls,
 [data-motion-styles='loaded'] .badge--motion,
 .badge--preference {
 	color: #ffffff;
@@ -91,7 +90,6 @@
 }
 
 [data-mode='native'] :is(.badge--core, .badge--base),
-[data-controls-styles='omitted'] .badge--controls,
 [data-motion-styles='omitted'] .badge--motion {
 	text-decoration: line-through;
 	opacity: .42;

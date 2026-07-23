@@ -3,7 +3,6 @@
 const nativeFrame = document.querySelector('#native-frame');
 const resetFrame = document.querySelector('#reset-frame');
 const resetFrameLink = document.querySelector('#reset-frame-link');
-const controlsToggle = document.querySelector('#controls-toggle');
 const motionToggle = document.querySelector('#motion-toggle');
 const syncToggle = document.querySelector('#sync-toggle');
 const scrollReset = document.querySelector('#scroll-reset');
@@ -509,18 +508,15 @@ const wireScrollSynchronization = () => {
 };
 
 const updateOptionalStyles = () => {
-	const hasControlsStyles = controlsToggle.checked;
 	const hasReducedMotionStyles = motionToggle.checked;
 	const resetFrameUrl = [
 		'./frame.html?mode=reset',
-		`controls=${hasControlsStyles ? '1' : '0'}`,
 		`motion=${hasReducedMotionStyles ? '1' : '0'}`,
 	].join('&');
 
 	resetFrameLink.href = resetFrameUrl;
 	resetFrame.contentWindow?.postMessage({
 		type: 'update-optional-styles',
-		controls: hasControlsStyles,
 		motion: hasReducedMotionStyles,
 	}, window.location.origin);
 };
@@ -555,7 +551,6 @@ window.addEventListener('load', () => {
 });
 window.addEventListener('resize', scheduleAlignment);
 
-controlsToggle.addEventListener('change', updateOptionalStyles);
 motionToggle.addEventListener('change', updateOptionalStyles);
 showUnchangedToggle.addEventListener('change', renderInspector);
 closeInspector.addEventListener('click', hideInspector);

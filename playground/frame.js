@@ -4,7 +4,6 @@ const searchParameters = new URLSearchParams(window.location.search);
 const hasReset = searchParameters.get('mode') === 'reset';
 const reducedMotionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-let hasControlsStyles = hasReset && searchParameters.get('controls') === '1';
 let hasReducedMotionStyles = hasReset && searchParameters.get('motion') === '1';
 
 const renderMode = () => {
@@ -14,9 +13,6 @@ const renderMode = () => {
 	document.querySelector('#preference-badge').textContent = reducedMotionPreference.matches
 		? 'OS preference: reduce'
 		: 'OS preference: no-preference';
-	document.querySelector('#controls-badge').title = hasControlsStyles
-		? 'The optional stylesheet is loaded'
-		: 'The optional stylesheet is not loaded';
 	document.querySelector('#motion-badge').title = hasReducedMotionStyles
 		? 'The optional stylesheet is loaded'
 		: 'The optional stylesheet is not loaded';
@@ -133,15 +129,11 @@ window.addEventListener('message', (event) => {
 		|| event.data?.type !== 'update-optional-styles'
 	) return;
 
-	hasControlsStyles = event.data.controls === true;
 	hasReducedMotionStyles = event.data.motion === true;
-	document.documentElement.dataset.controlsStyles = hasControlsStyles ? 'loaded' : 'omitted';
 	document.documentElement.dataset.motionStyles = hasReducedMotionStyles ? 'loaded' : 'omitted';
-	document.querySelector('#controls-reset').disabled = !hasControlsStyles;
 	document.querySelector('#motion-reset').disabled = !hasReducedMotionStyles;
 
 	const frameUrl = new URL(window.location.href);
-	frameUrl.searchParams.set('controls', hasControlsStyles ? '1' : '0');
 	frameUrl.searchParams.set('motion', hasReducedMotionStyles ? '1' : '0');
 	window.history.replaceState(null, '', frameUrl);
 

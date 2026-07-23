@@ -41,8 +41,6 @@
 		"./reset.min.css": "./dist/reset.min.css",
 		"./reset/base.css": "./dist/reset/base.css",
 		"./reset/base.min.css": "./dist/reset/base.min.css",
-		"./reset/controls.css": "./dist/reset/controls.css",
-		"./reset/controls.min.css": "./dist/reset/controls.min.css",
 		"./reset/core.css": "./dist/reset/core.css",
 		"./reset/core.min.css": "./dist/reset/core.min.css",
 		"./reset/reduced-motion.css": "./dist/reset/reduced-motion.css",

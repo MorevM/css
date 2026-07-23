@@ -7,7 +7,7 @@ import { transform } from 'esbuild';
 const projectDirectory = fileURLToPath(new URL('../', import.meta.url));
 const sourceDirectory = join(projectDirectory, 'src', 'reset');
 const outputDirectory = join(projectDirectory, 'dist');
-const layerNames = ['core', 'base', 'controls', 'reduced-motion'];
+const layerNames = ['core', 'base', 'reduced-motion'];
 
 const minifyCss = async (code, sourcefile) => {
 	const result = await transform(code, {
