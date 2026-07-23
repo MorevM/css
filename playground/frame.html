@@ -1,0 +1,1638 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Reset specimens</title>
+		<link
+			id="core-reset"
+			rel="stylesheet"
+			href="../src/reset/core.css"
+			disabled
+		/>
+		<link
+			id="base-reset"
+			rel="stylesheet"
+			href="../src/reset/base.css"
+			disabled
+		/>
+		<link
+			id="motion-reset"
+			rel="stylesheet"
+			href="../src/reset/reduced-motion.css"
+			disabled
+		/>
+		<link rel="stylesheet" href="./frame.css" />
+		<script src="./frame-bootstrap.js" defer></script>
+		<script type="module" src="./frame.js"></script>
+		<meta
+			name="description"
+			content="HTML element specimens for the @morev/css reset playground."
+		/>
+	</head>
+	<body class="playground-frame">
+		<header class="frame-header">
+			<p
+				id="mode-label"
+				class="frame-header__eyebrow"
+				aria-live="polite"
+			>Loading mode…</p>
+			<div
+				class="frame-header__title"
+				role="heading"
+				aria-level="1"
+			>HTML element coverage</div>
+			<p class="frame-header__description">
+				Use Inspect on a specimen to compare winning reset declarations with final resolved results.
+			</p>
+			<div class="frame-header__badges" aria-label="Loaded stylesheets">
+				<span id="core-badge" class="badge badge--core">core.css</span>
+				<span id="base-badge" class="badge badge--base">base.css</span>
+				<span
+					id="motion-badge"
+					class="badge badge--motion"
+				>reduced-motion.css</span>
+				<span
+					id="preference-badge"
+					class="badge badge--preference"
+				>Reading OS preference…</span>
+			</div>
+		</header>
+
+		<nav class="jump-navigation" aria-label="Specimen sections">
+			<a href="#core">Core</a>
+			<a href="#base">Base</a>
+			<a href="#motion">Reduced motion</a>
+			<a href="#preserved">Preserved</a>
+		</nav>
+
+		<main class="showcase">
+			<section id="core" class="showcase-section" aria-labelledby="core-title">
+				<header class="showcase-section__header">
+					<p class="showcase-section__eyebrow">core.css</p>
+					<h2
+						id="core-title"
+						class="showcase-section__title"
+					>Structural neutralization</h2>
+				</header>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>*, ::before, ::after</code>
+					</header>
+					<h3 class="specimen__title">Box sizing and browser spacing</h3>
+					<p class="specimen__description">
+						The pseudo-element should fit inside the fixed-width box only when border-box is active.
+					</p>
+					<div class="specimen__stage">
+						<div id="box-model-demo" class="box-model-demo">Fixed inline size</div>
+						<div class="raw-flow">
+							<h4>Default heading spacing</h4>
+							<p>Default paragraph spacing</p>
+							<blockquote>Default blockquote spacing</blockquote>
+						</div>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#box-model-demo"
+						data-pseudo="::before"
+						data-properties="box-sizing, min-inline-size, inline-size, padding-inline-start, border-inline-start-width"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>::-webkit-date-and-time-value, ::-webkit-datetime-edit-*</code>
+					</header>
+					<h3 class="specimen__title">Date and time internals</h3>
+					<p class="specimen__description">
+						These cases expose WebKit differences in empty values, alignment and shadow-tree spacing, plus the
+						Chromium regression caused by changing the value wrapper display. Compare both panes here for live
+						shadow-style diagnostics.
+					</p>
+					<div class="date-time-tests">
+						<section class="date-time-test">
+							<header class="date-time-test__header">
+								<span class="date-time-test__number">1</span>
+								<h4>Empty and filled values</h4>
+							</header>
+							<p>Choose or clear the first date and watch whether its height changes.</p>
+							<div class="date-time-test__fields">
+								<label class="date-time-field">
+									<span class="date-time-field__label">Empty date</span>
+									<input id="date-time-empty" class="date-time-probe" type="date" />
+									<small data-size-for="#date-time-empty">Measuring…</small>
+								</label>
+								<label class="date-time-field">
+									<span class="date-time-field__label">Filled date</span>
+									<input
+										id="date-time-filled"
+										class="date-time-probe"
+										type="date"
+										value="2026-07-22"
+									/>
+									<small data-size-for="#date-time-filled">Measuring…</small>
+								</label>
+							</div>
+							<output
+								class="date-time-test__result"
+								data-height-difference="#date-time-empty #date-time-filled"
+							>Measuring…</output>
+						</section>
+
+						<section class="date-time-test">
+							<header class="date-time-test__header">
+								<span class="date-time-test__number">2</span>
+								<h4>Value alignment</h4>
+							</header>
+							<p>The violet rule marks the expected inline end.</p>
+							<label class="date-time-field date-time-field--alignment">
+								<span class="date-time-field__label">
+									<code>text-align: end</code>
+								</span>
+								<input
+									id="date-time-aligned"
+									class="date-time-probe date-time-probe--end"
+									type="date"
+									value="2026-07-22"
+								/>
+								<small data-size-for="#date-time-aligned">Measuring…</small>
+							</label>
+						</section>
+
+						<section class="date-time-test">
+							<header class="date-time-test__header">
+								<span class="date-time-test__number">3</span>
+								<h4>Outer display</h4>
+							</header>
+							<p>Only the input participation in the outer layout changes.</p>
+							<div class="date-time-test__fields">
+								<label class="date-time-field">
+									<span class="date-time-field__label">
+										<code>inline-block</code>
+									</span>
+									<input
+										id="date-time-inline"
+										class="date-time-probe"
+										type="datetime-local"
+										value="2026-07-22T12:30"
+									/>
+									<small data-size-for="#date-time-inline">Measuring…</small>
+								</label>
+								<label class="date-time-field">
+									<span class="date-time-field__label">
+										<code>block</code>
+									</span>
+									<input
+										id="date-time-block"
+										class="date-time-probe date-time-probe--block"
+										type="datetime-local"
+										value="2026-07-22T12:30"
+									/>
+									<small data-size-for="#date-time-block">Measuring…</small>
+								</label>
+							</div>
+							<output
+								class="date-time-test__result"
+								data-height-difference="#date-time-inline #date-time-block"
+							>Measuring…</output>
+						</section>
+
+						<section class="date-time-test">
+							<header class="date-time-test__header">
+								<span class="date-time-test__number">4</span>
+								<h4>Identical author styling</h4>
+							</header>
+							<p>Text and date receive exactly the same external declarations.</p>
+							<div class="date-time-test__fields">
+								<label class="date-time-field">
+									<span class="date-time-field__label">Text</span>
+									<input
+										id="date-time-text-parity"
+										class="date-time-probe date-time-probe--block"
+										type="text"
+										value="2026-07-22"
+									/>
+									<small data-size-for="#date-time-text-parity">Measuring…</small>
+								</label>
+								<label class="date-time-field">
+									<span class="date-time-field__label">Date</span>
+									<input
+										id="date-time-date-parity"
+										class="date-time-probe date-time-probe--block"
+										type="date"
+										value="2026-07-22"
+									/>
+									<small data-size-for="#date-time-date-parity">Measuring…</small>
+								</label>
+							</div>
+							<output
+								class="date-time-test__result"
+								data-height-difference="#date-time-text-parity #date-time-date-parity"
+							>Measuring…</output>
+						</section>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#date-time-empty"
+						data-pseudo="::-webkit-date-and-time-value"
+						data-properties="min-block-size, text-align"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#date-time-aligned"
+						data-properties="text-align"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#date-time-aligned"
+						data-pseudo="::-webkit-date-and-time-value"
+						data-properties="text-align"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#date-time-inline"
+						data-properties="display, block-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#date-time-block"
+						data-properties="display, block-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#date-time-date-parity"
+						data-pseudo="::-webkit-datetime-edit"
+						data-properties="padding-block-start, padding-block-end"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>input, button, textarea, select, ::placeholder</code>
+					</header>
+					<h3 class="specimen__title">Form inheritance and neutralization</h3>
+					<p class="specimen__description">
+						Core makes controls inherit surrounding typography. Base gives placeholders consistent theme-relative
+						contrast, while native control presentation remains neutralized for the design system.
+					</p>
+					<div class="specimen__stage typography-context">
+						<input id="text-control" type="text" placeholder="Text placeholder" />
+						<button type="button">Button element</button>
+						<textarea
+							rows="2"
+							placeholder="Textarea placeholder"
+							aria-label="Textarea control"
+						></textarea>
+						<select aria-label="Select control">
+							<optgroup label="Optgroup">
+								<option>Option element</option>
+							</optgroup>
+						</select>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#text-control"
+						data-properties="color, font-family, line-height, letter-spacing, word-spacing, appearance, background-color, border-top-width, border-radius, box-shadow"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#text-control"
+						data-pseudo="::placeholder"
+						data-properties="opacity, color"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>input:disabled, textarea:disabled</code>
+					</header>
+					<h3 class="specimen__title">Disabled control opacity</h3>
+					<p class="specimen__description">
+						Core keeps disabled inputs and textareas opaque so component styles, rather than the iOS WebKit UA
+						stylesheet, control their contrast.
+					</p>
+					<div class="specimen__stage typography-context">
+						<input
+							id="disabled-input"
+							type="text"
+							value="Disabled input"
+							disabled
+						/>
+						<textarea
+							id="disabled-textarea"
+							rows="2"
+							disabled
+						>Disabled textarea</textarea>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#disabled-input"
+						data-properties="opacity, color"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#disabled-textarea"
+						data-properties="opacity, color"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>input types</code>
+					</header>
+					<h3 class="specimen__title">Input type matrix</h3>
+					<p class="specimen__description">
+						Core removes native control presentation and neutralizes browser-specific search, picker, spinner, color and
+						range surfaces. Small
+						fields use a playground-only 16px floor on coarse pointers to prevent focus zoom while testing.
+					</p>
+					<div class="input-matrix">
+						<label>
+							<span>text</span>
+							<input type="text" value="Text" />
+						</label>
+						<label>
+							<span>email</span>
+							<input type="email" value="mail@example.com" />
+						</label>
+						<label>
+							<span>password</span>
+							<input type="password" value="password" />
+						</label>
+						<label>
+							<span>search</span>
+							<input id="search-control" type="search" value="Search term" />
+						</label>
+						<label>
+							<span>number</span>
+							<input id="number-control" type="number" value="42" />
+						</label>
+						<label>
+							<span>tel</span>
+							<input type="tel" value="+1 555 0100" />
+						</label>
+						<label>
+							<span>url</span>
+							<input type="url" value="https://example.com" />
+						</label>
+						<label>
+							<span>date</span>
+							<input type="date" value="2026-07-19" />
+						</label>
+						<label>
+							<span>time</span>
+							<input type="time" value="12:30" />
+						</label>
+						<label>
+							<span>datetime-local</span>
+							<input type="datetime-local" value="2026-07-19T12:30" />
+						</label>
+						<label>
+							<span>month</span>
+							<input type="month" value="2026-07" />
+						</label>
+						<label>
+							<span>week</span>
+							<input type="week" value="2026-W29" />
+						</label>
+						<label>
+							<span>color</span>
+							<input type="color" value="#5a67d8" />
+						</label>
+						<label>
+							<span>range</span>
+							<input type="range" value="60" />
+						</label>
+						<label>
+							<span>checkbox</span>
+							<input type="checkbox" checked />
+						</label>
+						<label>
+							<span>radio</span>
+							<input type="radio" checked />
+						</label>
+						<label>
+							<span>file</span>
+							<input id="file-control" type="file" />
+						</label>
+						<label>
+							<span>button</span>
+							<input type="button" value="Button input" />
+						</label>
+						<label>
+							<span>submit</span>
+							<input type="submit" value="Submit input" />
+						</label>
+						<label>
+							<span>reset</span>
+							<input type="reset" value="Reset input" />
+						</label>
+						<label>
+							<span>image</span>
+							<input
+								type="image"
+								alt="Image input"
+								width="72"
+								height="28"
+								src="./assets/input-image.svg"
+							/>
+						</label>
+						<input id="hidden-input" type="hidden" value="Hidden input" />
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#hidden-input"
+						data-properties="display, appearance"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#search-control"
+						data-properties="font-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#search-control"
+						data-pseudo="::-webkit-search-cancel-button"
+						data-properties="display, appearance"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#number-control"
+						data-properties="appearance"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#number-control"
+						data-pseudo="::-webkit-inner-spin-button"
+						data-properties="appearance"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>a, button</code>
+					</header>
+					<h3 class="specimen__title">Links and buttons</h3>
+					<div class="specimen__stage inheritance-demo">
+						<a id="plain-link" href="#core">Inherited link presentation</a>
+						<button id="plain-button" type="button">Neutralized button</button>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#plain-link"
+						data-properties="color, text-decoration-line"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#plain-button"
+						data-properties="inline-size, text-align, appearance, background-color, border-top-width"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>::file-selector-button</code>
+					</header>
+					<h3 class="specimen__title">File selector button</h3>
+					<p class="specimen__description">
+						The standardized button surface inherits typography while its native presentation is neutralized.
+					</p>
+					<div class="specimen__stage typography-context">
+						<input id="reset-file-control" type="file" />
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#reset-file-control"
+						data-pseudo="::file-selector-button"
+						data-properties="color, font-family, letter-spacing, word-spacing, text-align, appearance, margin-inline-start, padding-inline-start, background-color, border-top-width, box-shadow"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>audio, canvas, img, picture, svg, video</code>
+					</header>
+					<h3 class="specimen__title">Embedded media</h3>
+					<p class="specimen__description">
+						The narrow container exposes max-inline-size behavior; every specimen also leaves inline layout
+						and loses its baseline gap.
+					</p>
+					<div class="media-constraint">
+						<audio id="audio-media" controls></audio>
+						<picture id="picture-media">
+							<img
+								id="image-media"
+								alt="A gradient test card"
+								width="360"
+								height="120"
+								src="./assets/image.svg"
+							/>
+						</picture>
+						<svg
+							id="svg-media"
+							viewBox="0 0 360 120"
+							width="360"
+							height="120"
+							aria-label="Inline SVG test card"
+						>
+							<rect width="360" height="120" fill="#2f855a"></rect>
+							<circle cx="60" cy="60" r="34" fill="#f6e05e"></circle>
+							<text x="115" y="68" fill="white">360 × 120 inline SVG</text>
+						</svg>
+						<video
+							id="video-media"
+							controls
+							width="360"
+							height="120"
+							poster="./assets/video.svg"
+						></video>
+						<canvas
+							id="canvas-media"
+							width="360"
+							height="120"
+						>Canvas fallback</canvas>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#image-media"
+						data-properties="display, max-inline-size, block-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#audio-media"
+						data-properties="display, max-inline-size, block-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#picture-media"
+						data-properties="display"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#svg-media"
+						data-properties="display, max-inline-size, block-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#video-media"
+						data-properties="display, max-inline-size, block-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#canvas-media"
+						data-properties="display, max-inline-size, block-size"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>embed, iframe, object</code>
+					</header>
+					<h3 class="specimen__title">Embedded document overflow</h3>
+					<p class="specimen__description">
+						Each element requests a 360 × 120 viewport for the same fixed 720 × 240 HTML document. Both start
+						with a 3:1 ratio. The reset
+						caps only the outer width: its height stays 120px and the inner document becomes scrollable instead
+						of transferring an aspect ratio.
+					</p>
+					<div class="media-constraint embedded-document-grid">
+						<figure class="embedded-document-demo">
+							<figcaption>
+								<strong>object</strong>
+								· outer request: 360 × 120
+							</figcaption>
+							<object
+								id="object-media"
+								class="embedded-document-frame"
+								type="text/html"
+								data="./assets/embedded-document.html"
+								width="360"
+								height="120"
+							></object>
+						</figure>
+						<figure class="embedded-document-demo">
+							<figcaption>
+								<strong>embed</strong>
+								· outer request: 360 × 120
+							</figcaption>
+							<embed
+								id="embed-media"
+								class="embedded-document-frame"
+								type="text/html"
+								src="./assets/embedded-document.html"
+								width="360"
+								height="120"
+							/>
+						</figure>
+						<figure class="embedded-document-demo">
+							<figcaption>
+								<strong>iframe</strong>
+								· outer request: 360 × 120
+							</figcaption>
+							<iframe
+								id="document-iframe-media"
+								class="embedded-document-frame"
+								title="HTML document constrained by the reset"
+								src="./assets/embedded-document.html"
+								width="360"
+								height="120"
+							></iframe>
+						</figure>
+					</div>
+					<p class="embedded-document-note">
+						<strong>Compare the values below:</strong>
+						inline-size shrinks below 360px in the reset pane, but block-size remains 120px. If the 3:1 ratio
+						were transferred, the height would shrink too.
+					</p>
+					<output
+						class="computed-values"
+						data-computed-for="#object-media"
+						data-properties="display, inline-size, block-size, max-inline-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#embed-media"
+						data-properties="display, inline-size, block-size, max-inline-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#document-iframe-media"
+						data-properties="display, inline-size, block-size, max-inline-size"
+					></output>
+				</article>
+
+				<article class="specimen specimen--overflow-probe">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>input, select, textarea</code>
+					</header>
+					<h3 class="specimen__title">Form control overflow</h3>
+					<p class="specimen__description">
+						The playground gives each control a 24rem inline size inside the 12rem dashed boundary. The reset
+						caps them at the container width without changing their height.
+					</p>
+					<div class="form-control-overflow">
+						<input
+							id="overflow-input"
+							type="text"
+							aria-label="Deliberately wide text input"
+							value="A deliberately wide input value"
+						/>
+						<select id="overflow-select" aria-label="Deliberately wide select">
+							<option>A deliberately long option that requests more inline space than the container</option>
+						</select>
+						<textarea
+							id="overflow-textarea"
+							aria-label="Deliberately wide textarea"
+							rows="2"
+						>A deliberately wide textarea</textarea>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#overflow-input"
+						data-properties="inline-size, block-size, max-inline-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#overflow-select"
+						data-properties="inline-size, block-size, max-inline-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#overflow-textarea"
+						data-properties="inline-size, block-size, max-inline-size"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>table, caption, th, fieldset, iframe</code>
+					</header>
+					<h3 class="specimen__title">Tables and framed content</h3>
+					<div class="specimen__stage specimen__stage--columns">
+						<table id="table-demo" class="table-demo">
+							<caption id="table-caption">Table caption</caption>
+							<thead>
+								<tr>
+									<th id="table-heading">Heading A</th>
+									<th>Heading B</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Cell A</td>
+									<td>Cell B</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<fieldset id="fieldset-demo">
+							<legend>Fieldset legend</legend>
+							Fieldset content
+						</fieldset>
+
+						<iframe
+							id="iframe-demo"
+							title="Nested iframe specimen"
+							srcdoc="<!doctype html><p>Nested iframe</p>"
+						></iframe>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#table-demo"
+						data-properties="border-collapse, border-spacing"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#fieldset-demo"
+						data-properties="border-top-width, padding-inline-start"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#table-caption"
+						data-properties="text-align"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#table-heading"
+						data-properties="text-align"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#iframe-demo"
+						data-properties="border-top-width"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>h1–h6, ul, ol, menu</code>
+					</header>
+					<h3 class="specimen__title">Headings and lists</h3>
+					<div class="specimen__stage specimen__stage--columns">
+						<div id="heading-demo" class="raw-headings">
+							<h1>Heading level 1</h1>
+							<h2>Heading level 2</h2>
+							<h3>Heading level 3</h3>
+							<h4>Heading level 4</h4>
+							<h5>Heading level 5</h5>
+							<h6>Heading level 6</h6>
+						</div>
+						<div class="raw-lists">
+							<ul id="unordered-list">
+								<li>Unordered item</li>
+								<li>Second item</li>
+							</ul>
+							<ol id="ordered-list">
+								<li>Ordered item</li>
+								<li>Second item</li>
+							</ol>
+							<menu id="menu-list">
+								<li>Menu item</li>
+								<li>Second menu item</li>
+							</menu>
+						</div>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#heading-demo h1"
+						data-properties="font-size, font-weight, margin-block-start"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#unordered-list"
+						data-properties="list-style-type, padding-inline-start"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#menu-list"
+						data-properties="list-style-type, padding-inline-start"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>summary, progress, meter</code>
+					</header>
+					<h3 class="specimen__title">Disclosure and indicator surfaces</h3>
+					<p class="specimen__description">
+						Core removes the disclosure marker. Progress and meter retain their values and states, but remain neutralized
+						for the design system.
+					</p>
+					<div class="specimen__stage specimen__stage--columns">
+						<details open>
+							<summary id="native-summary">Toggle details content</summary>
+							<p>Details content remains controlled by the native open state.</p>
+						</details>
+						<label>
+							Determinate progress
+							<progress id="native-progress" max="100" value="65">65%</progress>
+						</label>
+						<label>
+							Indeterminate progress
+							<progress max="100">Loading</progress>
+						</label>
+						<label>
+							Optimum meter
+							<meter
+								id="native-meter"
+								min="0"
+								low="30"
+								high="70"
+								optimum="100"
+								max="100"
+								value="80"
+							>80%</meter>
+						</label>
+						<label>
+							Suboptimum meter
+							<meter
+								min="0"
+								low="30"
+								high="70"
+								optimum="100"
+								max="100"
+								value="50"
+							>50%</meter>
+						</label>
+						<label>
+							Even less good meter
+							<meter
+								min="0"
+								low="30"
+								high="70"
+								optimum="100"
+								max="100"
+								value="20"
+							>20%</meter>
+						</label>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#native-summary"
+						data-properties="display, list-style-type"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#native-progress"
+						data-properties="appearance, vertical-align, background-color, background-image, border-top-width, border-radius"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#native-meter"
+						data-properties="appearance, vertical-align, background-color, background-image, border-top-width, border-radius"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>dialog, dialog::backdrop</code>
+					</header>
+					<h3 class="specimen__title">Dialog surface and placement</h3>
+					<p class="specimen__description">
+						Open the dialog in both panes, then toggle its dynamic content. Core removes the popup and backdrop
+						presentation without changing native placement, so dynamic content does not recenter the dialog.
+					</p>
+					<div class="specimen__stage">
+						<button
+							type="button"
+							data-dialog-open="dialog-demo"
+						>Open dialog</button>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#dialog-demo"
+						data-properties="display, position, margin-block-start, margin-inline-start, padding-block-start, color, background-color, border-top-width, box-shadow, overflow"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#dialog-demo"
+						data-pseudo="::backdrop"
+						data-properties="background-color"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--mixed">Affected with exceptions</span>
+						<code>[hidden], [hidden="until-found"], embed, hr</code>
+					</header>
+					<h3 class="specimen__title">Hidden states and horizontal rules</h3>
+					<p class="specimen__description">
+						Regular hidden content is forced off.
+						<code>until-found</code>
+						remains searchable; a hidden
+						<code>embed</code>
+						remains rendered as a zero-sized inline box.
+					</p>
+					<div class="specimen__stage">
+						<div id="regular-hidden" hidden>Regular hidden content</div>
+						<div
+							id="until-found-hidden"
+							hidden="until-found"
+						>Search-revealable hidden content</div>
+						<embed
+							id="hidden-embed"
+							hidden
+							type="image/svg+xml"
+							src="./assets/hidden-embed.svg"
+						/>
+						<hr id="horizontal-rule" class="horizontal-rule-demo" />
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#regular-hidden"
+						data-properties="display"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#until-found-hidden"
+						data-properties="display, content-visibility"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#hidden-embed"
+						data-properties="display, inline-size, block-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#horizontal-rule"
+						data-properties="border-top-width, border-top-style, border-top-color"
+					></output>
+				</article>
+			</section>
+
+			<section id="base" class="showcase-section" aria-labelledby="base-title">
+				<header class="showcase-section__header">
+					<p class="showcase-section__eyebrow">base.css</p>
+					<h2
+						id="base-title"
+						class="showcase-section__title"
+					>Document and interaction defaults</h2>
+				</header>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>:root, body</code>
+					</header>
+					<h3 class="specimen__title">Document defaults</h3>
+					<div class="specimen__stage">
+						<p id="root-text-sample">System typography, line height and text rendering inherit from the root.</p>
+					</div>
+					<pre
+						id="tab-sample"
+						class="tab-size-demo"
+					><code>if&#9;(ready) {&#10;&#9;run();&#10;}</code></pre>
+					<output
+						class="computed-values"
+						data-computed-for=":root"
+						data-properties="font-family, line-height, tab-size, text-rendering, -webkit-font-smoothing, -moz-osx-font-smoothing, -webkit-tap-highlight-color, -webkit-text-size-adjust, text-size-adjust, scroll-behavior, interpolate-size, min-block-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="body"
+						data-properties="min-block-size"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>code, kbd, samp, pre</code>
+					</header>
+					<h3 class="specimen__title">Monospace typography</h3>
+					<p class="specimen__description">
+						The reset prefers the platform UI monospace font and falls back to the browser's configured monospace.
+						The two-family list also keeps inline code at the surrounding text size.
+					</p>
+					<div class="specimen__stage">
+						<span id="monospace-reference">Regular text at the inherited size.</span>
+						<code id="monospace-code">const answer = 42;</code>
+						<kbd>Ctrl</kbd>
+						<samp>Process completed</samp>
+						<pre>Preformatted output</pre>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#monospace-reference"
+						data-properties="font-family, font-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#monospace-code"
+						data-properties="font-family, font-size"
+					></output>
+				</article>
+
+				<article class="specimen specimen--overflow-probe">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>*, ::before, ::after { min-inline-size: 0 }</code>
+					</header>
+					<h3 class="specimen__title">Flex and grid shrinking</h3>
+					<p class="specimen__description">
+						Each flexible item contains a 24rem-wide descendant. Its automatic minimum pushes the aside beyond
+						the fixed container unless the reset sets
+						<code>min-inline-size: 0</code>
+						on the item.
+					</p>
+					<div class="shrink-demos">
+						<div>
+							<span class="shrink-demo__label">
+								<code>grid-template-columns: 1fr auto</code>
+							</span>
+							<div class="shrink-demo shrink-demo--grid">
+								<div id="grid-shrink-child" class="shrink-demo__child">
+									Grid item
+									<span class="shrink-demo__constraint" aria-hidden="true"></span>
+								</div>
+								<div class="shrink-demo__aside">Aside</div>
+							</div>
+						</div>
+						<div>
+							<span class="shrink-demo__label">
+								<code>flex: 1 1 0%</code>
+							</span>
+							<div class="shrink-demo shrink-demo--flex">
+								<div id="flex-shrink-child" class="shrink-demo__child">
+									Flex item
+									<span class="shrink-demo__constraint" aria-hidden="true"></span>
+								</div>
+								<div class="shrink-demo__aside">Aside</div>
+							</div>
+						</div>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#grid-shrink-child"
+						data-properties="min-inline-size, inline-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#flex-shrink-child"
+						data-properties="min-inline-size, inline-size"
+					></output>
+				</article>
+
+				<article class="specimen specimen--overflow-probe">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>pre</code>
+					</header>
+					<h3 class="specimen__title">Preformatted content overflow</h3>
+					<p class="specimen__description">
+						The long line paints beyond the dashed boundary in the native pane. In the reset pane it stays inside
+						and can be scrolled horizontally.
+					</p>
+					<div class="pre-overflow-demo">
+						<div class="pre-overflow-boundary">
+							<pre
+								id="pre-overflow-sample"
+								class="pre-overflow-sample"
+							>2026-07-19T12:30:00Z request_id=019f871c256e7eb0bd908d76ff8f68d9 path=/exports/quarterly-report.css</pre>
+						</div>
+						<p>
+							The playground contains native overflow within this specimen. The reset makes the
+							<code>pre</code>
+							element itself the local scroll container.
+						</p>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#pre-overflow-sample"
+						data-properties="overflow-x, overflow-y, white-space, inline-size"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>button, input, select, textarea, option, optgroup</code>
+					</header>
+					<h3 class="specimen__title">Compact control line height</h3>
+					<div class="specimen__stage">
+						<select id="line-height-control">
+							<optgroup id="line-height-group" label="Group">
+								<option id="line-height-option">Control with an option</option>
+							</optgroup>
+						</select>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#line-height-control"
+						data-properties="line-height"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#line-height-group"
+						data-properties="line-height"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#line-height-option"
+						data-properties="line-height"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>command-like and clickable elements</code>
+					</header>
+					<h3 class="specimen__title">Selection and touch behavior</h3>
+					<p class="specimen__description">Try selecting the labels and command text, then inspect the values.</p>
+					<div class="interaction-grid">
+						<div>
+							<button
+								id="interaction-button"
+								class="command-demo"
+								type="button"
+							>button</button>
+						</div>
+						<div>
+							<input
+								id="interaction-input-button"
+								class="command-demo"
+								type="button"
+								value="input button"
+							/>
+						</div>
+						<div>
+							<input
+								id="interaction-submit"
+								class="command-demo"
+								type="submit"
+								value="input submit"
+							/>
+						</div>
+						<div>
+							<input
+								id="interaction-reset"
+								class="command-demo"
+								type="reset"
+								value="input reset"
+							/>
+						</div>
+						<div>
+							<a id="interaction-link" href="#target-sample">anchor link</a>
+						</div>
+						<div>
+							<label id="interaction-label" for="interaction-checkbox">label</label>
+						</div>
+						<div>
+							<input id="interaction-checkbox" type="checkbox" />
+						</div>
+						<details>
+							<summary id="interaction-summary">summary</summary>
+							<p>Details content</p>
+						</details>
+						<div
+							id="interaction-role-button"
+							class="command-demo"
+							role="button"
+							tabindex="0"
+						>role button</div>
+						<div
+							id="interaction-role-tab"
+							class="command-demo"
+							role="tab"
+							tabindex="0"
+						>role tab</div>
+						<div
+							id="interaction-role-menuitem"
+							class="command-demo"
+							role="menuitem"
+							tabindex="0"
+						>role menuitem</div>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#interaction-button"
+						data-properties="line-height, user-select, -webkit-touch-callout, touch-action, cursor"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#interaction-link"
+						data-properties="user-select, touch-action, cursor"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#interaction-role-button"
+						data-properties="user-select, -webkit-touch-callout, touch-action, cursor"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--mixed">Conditional</span>
+						<code>label, summary, enabled native controls</code>
+					</header>
+					<h3 class="specimen__title">Pointer cursor matrix</h3>
+					<div class="cursor-grid">
+						<label id="cursor-label">label</label>
+						<summary id="cursor-summary">summary</summary>
+						<button id="cursor-button" type="button">button</button>
+						<button
+							id="cursor-disabled-button"
+							type="button"
+							disabled
+						>disabled button</button>
+						<select id="cursor-select">
+							<option>select</option>
+						</select>
+						<select
+							id="cursor-disabled-select"
+							disabled
+						>
+							<option>disabled select</option>
+						</select>
+						<input id="cursor-file" type="file" />
+						<input id="cursor-checkbox" type="checkbox" aria-label="Checkbox" />
+						<input id="cursor-radio" type="radio" aria-label="Radio" />
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#cursor-button"
+						data-properties="cursor"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#cursor-disabled-button"
+						data-properties="cursor"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#cursor-file"
+						data-properties="cursor"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#cursor-file"
+						data-pseudo="::file-selector-button"
+						data-properties="cursor"
+					></output>
+				</article>
+
+				<article class="specimen specimen--overflow-probe">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>:root, small, sub, sup</code>
+					</header>
+					<h3 class="specimen__title">Text wrapping and inline annotations</h3>
+					<p class="specimen__description">
+						Root provides emergency wrapping to every text context. Small print uses an explicit 80% scale;
+						subscripts and superscripts use fixed logical offsets with a minimal line-height contribution.
+					</p>
+					<div class="text-constraint">
+						<h2 id="balanced-heading">A deliberately longer heading that can balance across several lines</h2>
+						<!-- cspell:ignore verylongunbrokencontentsegmentthatneedstobreakbeforeoverflowingthecontainer -->
+						<p id="pretty-paragraph">
+							Pretty wrapping applies to paragraphs, including a long token:
+							verylongunbrokencontentsegmentthatneedstobreakbeforeoverflowingthecontainer.
+						</p>
+						<!-- cspell:ignore genericcomponentcontentwithoutbreakopportunities -->
+						<div id="root-wrap-sample">
+							Generic component: genericcomponentcontentwithoutbreakopportunities
+						</div>
+						<p id="annotation-sample">
+							An ordinary line of text above.
+							<br />
+							Water is H
+							<sub>2</sub>
+							O and 2
+							<sup>10</sup>
+							equals 1024.
+							<br />
+							An ordinary line of text below.
+						</p>
+						<p>
+							Regular text,
+							<small id="small-sample">
+								small print and
+								<small id="nested-small-sample">nested small print</small>
+							</small>
+							.
+						</p>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#balanced-heading"
+						data-properties="overflow-wrap, text-wrap-mode, text-wrap-style"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#pretty-paragraph"
+						data-properties="overflow-wrap, text-wrap-mode, text-wrap-style"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#root-wrap-sample"
+						data-properties="overflow-wrap"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#annotation-sample sup"
+						data-properties="position, inset-block-start, font-size, line-height, vertical-align"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#annotation-sample sub"
+						data-properties="position, inset-block-end, font-size, line-height, vertical-align"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#small-sample"
+						data-properties="font-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#nested-small-sample"
+						data-properties="font-size"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>textarea, textarea:not([rows])</code>
+					</header>
+					<h3 class="specimen__title">Textarea sizing</h3>
+					<div class="specimen__stage specimen__stage--columns">
+						<textarea id="textarea-without-rows">No rows attribute</textarea>
+						<textarea id="textarea-with-rows" rows="3">Three rows</textarea>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#textarea-without-rows"
+						data-properties="line-height, resize, min-block-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#textarea-with-rows"
+						data-properties="resize, min-block-size"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>:target, :focus-visible</code>
+					</header>
+					<h3 class="specimen__title">Navigation targets and keyboard focus</h3>
+					<p class="specimen__description">
+						Activate the link to target this card. Use Tab to inspect the high-contrast focus outline.
+					</p>
+					<div class="specimen__stage">
+						<a href="#target-sample">Jump to target</a>
+						<a id="focus-link" href="#base">Keyboard-focusable link</a>
+						<div
+							id="target-sample"
+							class="target-sample"
+							tabindex="-1"
+						>Target destination</div>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#target-sample"
+						data-properties="scroll-margin-block-start"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#focus-link"
+						data-properties="outline-width, outline-style, outline-color, outline-offset"
+					></output>
+				</article>
+			</section>
+
+			<section id="motion" class="showcase-section" aria-labelledby="motion-title">
+				<header class="showcase-section__header">
+					<p class="showcase-section__eyebrow">reduced-motion.css</p>
+					<h2
+						id="motion-title"
+						class="showcase-section__title"
+					>Reduced motion policy</h2>
+				</header>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--optional">Preference-dependent</span>
+						<code>*, ::before, ::after, ::marker, ::backdrop</code>
+					</header>
+					<h3 class="specimen__title">Animation and transition coverage</h3>
+					<p class="specimen__description">
+						Effects are shortened only when the stylesheet is loaded and the OS requests reduced motion.
+					</p>
+					<div class="motion-stage">
+						<div
+							id="motion-element"
+							class="motion-element"
+						>Element + pseudo-elements</div>
+						<button
+							id="motion-transition"
+							class="motion-transition"
+							type="button"
+						>Hover transition</button>
+						<ul id="motion-marker" class="motion-marker">
+							<li>Animated marker</li>
+						</ul>
+						<button
+							type="button"
+							data-dialog-open="motion-dialog"
+						>Open animated backdrop</button>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#motion-element"
+						data-properties="animation-duration, animation-delay, animation-iteration-count, transition-duration, transition-delay"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#motion-element"
+						data-pseudo="::before"
+						data-properties="animation-duration, animation-delay, animation-iteration-count"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#motion-element"
+						data-pseudo="::after"
+						data-properties="animation-duration, animation-delay, animation-iteration-count"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#motion-marker li"
+						data-pseudo="::marker"
+						data-properties="animation-duration, animation-delay, animation-iteration-count"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#motion-dialog"
+						data-pseudo="::backdrop"
+						data-properties="animation-duration, animation-delay, animation-iteration-count"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--optional">Preference-dependent</span>
+						<code>background-attachment, scroll-behavior</code>
+					</header>
+					<h3 class="specimen__title">Scroll-linked motion</h3>
+					<p class="specimen__description">
+						Scroll the frame to observe the fixed background. Use the button inside the container to test nested smooth scrolling.
+					</p>
+					<div class="motion-stage">
+						<div
+							id="motion-fixed-background"
+							class="motion-fixed-background"
+						>Fixed background</div>
+						<div
+							id="motion-scroll-container"
+							class="motion-scroll-container"
+						>
+							<button
+								id="motion-scroll-trigger"
+								class="motion-scroll-container__trigger"
+								type="button"
+							>Scroll to nested target</button>
+							<strong
+								id="motion-scroll-target"
+								class="motion-scroll-container__target"
+							>Nested target</strong>
+						</div>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#motion-fixed-background"
+						data-properties="background-attachment"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#motion-scroll-container"
+						data-properties="scroll-behavior"
+					></output>
+				</article>
+			</section>
+
+			<section
+				id="preserved"
+				class="showcase-section"
+				aria-labelledby="preserved-title"
+			>
+				<header class="showcase-section__header">
+					<p class="showcase-section__eyebrow">Native surface</p>
+					<h2
+						id="preserved-title"
+						class="showcase-section__title"
+					>Preserved and not directly targeted</h2>
+					<p class="showcase-section__description">
+						These specimens retain native presentation or have no dedicated rule. Universal spacing,
+						box-sizing and min-inline-size rules still apply.
+					</p>
+				</header>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--preserved">Preserved</span>
+						<code>inline text semantics</code>
+					</header>
+					<h3 class="specimen__title">Semantic emphasis and annotations</h3>
+					<div class="semantic-demo">
+						<strong>strong</strong>
+						,
+						<b>b</b>
+						,
+						<em>em</em>
+						,
+						<i>i</i>
+						,
+						<mark>mark</mark>
+						,
+						<var>var</var>
+						,
+						<abbr title="Abbreviation">abbr</abbr>
+						,
+						<del>deleted</del>
+						,
+						<ins>inserted</ins>
+						and
+						<cite>cite</cite>
+						.
+					</div>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--preserved">Preserved</span>
+						<code>blockquote, q, dl</code>
+					</header>
+					<h3 class="specimen__title">Text structures</h3>
+					<div class="preserved-stack">
+						<blockquote>
+							A native blockquote containing
+							<q>a native inline quotation</q>
+							.
+						</blockquote>
+						<dl>
+							<dt>Description term</dt>
+							<dd>Description details</dd>
+						</dl>
+					</div>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--preserved">Preserved</span>
+						<code>::selection, caret, scrollbar</code>
+					</header>
+					<h3 class="specimen__title">Platform selection and editing feedback</h3>
+					<div class="selection-demo">
+						<p contenteditable="true">Select this text, place the caret here, and scroll the box.</p>
+						<div class="selection-demo__scroller">
+							Scrollbar presentation remains platform-controlled.
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							End of content.
+						</div>
+					</div>
+				</article>
+			</section>
+		</main>
+
+		<dialog id="motion-dialog" class="demo-dialog demo-dialog--motion">
+			<p>Backdrop animation is part of the reduced-motion selector coverage.</p>
+			<button type="button" data-dialog-close>Close</button>
+		</dialog>
+
+		<dialog id="dialog-demo" class="demo-dialog">
+			<p>The dialog itself has no playground surface styling.</p>
+			<details>
+				<summary>Toggle dynamic content</summary>
+				<div class="dialog-demo__dynamic-content">
+					<p>Additional content line one.</p>
+					<p>Additional content line two.</p>
+					<p>Additional content line three.</p>
+					<p>Additional content line four.</p>
+				</div>
+			</details>
+			<button type="button" data-dialog-close>Close</button>
+		</dialog>
+	</body>
+</html>

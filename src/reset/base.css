@@ -1,0 +1,242 @@
+/**
+ * Let flex and grid children shrink instead of forcing overflow.
+ * https://css-tricks.com/preventing-a-grid-blowout/
+ */
+*, ::before, ::after {
+	min-inline-size: 0;
+}
+
+/**
+ * Establish document-wide typography and platform behavior.
+ * 1. Use the system UI font stack.
+ * 2. Set a readable default line height.
+ * 3. Use the non-standard WebKit/Blink font-smoothing API on macOS; it has no unprefixed equivalent.
+ *    https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-smooth
+ * 4. Use the non-standard Firefox font-smoothing API on macOS; it has no unprefixed equivalent.
+ *    https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-smooth
+ * 5. Ask the browser to prioritize legibility.
+ *    There is no significant performance overhead: https://bugs.webkit.org/show_bug.cgi?id=41363
+ * 6. Make tab stops compact in preformatted content (default is 8).
+ * 7. Remove the iOS Safari tap highlight through its non-standard API; it has no unprefixed equivalent.
+ *    https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariCSSRef/
+ * 8. Prevent mobile font inflation in iOS Safari. Safari 26.5 (11 May 2026) still requires the prefixed property.
+ *    https://bugs.webkit.org/show_bug.cgi?id=229086
+ * 9. Apply the same policy through the standard property where supported.
+ * 10. Keep unbroken content inside its container by default.
+ *     Components requiring an intact line must opt into their own overflow policy.
+ */
+:where(:root) {
+	font-family: system-ui, sans-serif; /* 1 */
+	line-height: 1.5; /* 2 */
+	-webkit-font-smoothing: antialiased; /* 3 */
+	-moz-osx-font-smoothing: grayscale; /* 4 */
+	text-rendering: optimizeLegibility; /* 5 */
+	tab-size: 2; /* 6 */
+	-webkit-tap-highlight-color: transparent; /* 7 */
+	-webkit-text-size-adjust: 100%; /* 8 */
+	text-size-adjust: 100%; /* 9 */
+	overflow-wrap: break-word; /* 10 */
+}
+
+/**
+ * Normalize monospace typography.
+ * 1. Prefer the platform UI monospace and fall back to the user-configured generic.
+ *    https://bugzilla.mozilla.org/show_bug.cgi?id=1598881
+ * 2. Avoid the smaller fixed-width size applied to an exact `monospace`.
+ *    https://bugzilla.mozilla.org/show_bug.cgi?id=175415
+ *    https://bugs.webkit.org/show_bug.cgi?id=19161
+ */
+:where(code, kbd, samp, pre) {
+	font-family: ui-monospace, monospace; /* 1, 2 */
+}
+
+/**
+ * Keep controls from becoming taller than surrounding interactive UI.
+ */
+:where(button, input, select, textarea, option, optgroup) {
+	line-height: 1.2;
+}
+
+/**
+ * Give placeholders consistent theme-relative contrast.
+ * Chromium uses #757575:
+ * https://github.com/chromium/chromium/blob/3cc2f39/third_party/blink/renderer/core/html/resources/html.css#L613-L615
+ * Firefox mixes currentColor at 54% in sRGB:
+ * https://github.com/mozilla-firefox/firefox/blob/bd3f43d/layout/style/res/forms.css#L172-L175
+ * WebKit uses darkgray:
+ * https://github.com/WebKit/WebKit/blob/a47f597/Source/WebCore/css/html.css#L740-L742
+ */
+::placeholder {
+	color: color-mix(in oklab, currentColor 50%, transparent);
+}
+
+/**
+ * Enable document-level interaction polish while respecting reduced motion.
+ * 1. Smooth in-page navigation by default.
+ * 2. Allow transitions to and from intrinsic size keywords.
+ */
+/* stylelint-disable-next-line no-duplicate-selectors -- Root defaults and interaction behavior are separate domains. */
+:where(:root) {
+	scroll-behavior: smooth; /* 1 */
+	interpolate-size: allow-keywords; /* 2 */
+
+	@media (prefers-reduced-motion: reduce) {
+		scroll-behavior: auto;
+		interpolate-size: numeric-only;
+	}
+}
+
+/**
+ * Prevent accidental text selection on elements that behave like commands.
+ * 1. Disable selection in standard browsers.
+ * 2. Disable the long-press callout through iOS Safari's non-standard API; it has no unprefixed equivalent.
+ *    https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariCSSRef/
+ */
+:where(
+	button,
+	input:is([type='button'], [type='submit'], [type='reset']),
+	[role='button'],
+	[role='tab'],
+	[role='menuitem']
+) {
+	user-select: none; /* 1 */
+	-webkit-touch-callout: none; /* 2 */
+}
+
+/**
+ * Keep taps responsive at every zoom scale by disabling
+ * double-tap zoom while preserving panning and pinch zoom.
+ */
+:where(
+	button,
+	input:is([type='button'], [type='submit'], [type='reset']),
+	a[href],
+	summary,
+	label,
+	[role='button'],
+	[role='tab'],
+	[role='menuitem']
+) {
+	touch-action: manipulation;
+}
+
+/**
+ * Make the page fill the dynamic viewport height.
+ */
+:where(:root, body) {
+	min-block-size: 100dvb;
+}
+
+/**
+ * Use an explicit small-print scale instead of the UA-defined `smaller` step.
+ * This keeps the typographic ratio predictable across contexts.
+ */
+:where(small) {
+	font-size: 80%;
+}
+
+/**
+ * Keep superscript and subscript compact with predictable baseline offsets.
+ * 1. Replace browser-defined sub/super positioning with fixed logical offsets.
+ *    Without it, super/sub can expand lines at parent line-height up to about .7.
+ * 2. Scale inline annotations down (default is .83em that is too big).
+ * 3. Minimize their contribution to the line box.
+ *    A small contribution remains when the parent line-height is .2 or lower.
+ */
+:where(sup, sub) {
+	position: relative; /* 1 */
+	vertical-align: baseline; /* 1 */
+	font-size: .75em; /* 2 */
+	line-height: 0; /* 3 */
+}
+
+:where(sub) {
+	inset-block-end: -.25em;
+}
+
+:where(sup) {
+	inset-block-start: -.5em;
+}
+
+/**
+ * Show a pointer cursor only for elements
+ * that are meant to be activated.
+ */
+:where(
+	label,
+	summary,
+	:where(
+		button,
+		select,
+		input:is(
+			[type='button'],
+			[type='submit'],
+			[type='reset'],
+			[type='file'],
+			[type='checkbox'],
+			[type='radio']
+		)
+	):not(:disabled)
+) {
+	cursor: pointer;
+}
+
+/**
+ * Chromium does not propagate the input cursor to its file picker button.
+ */
+:where(input[type='file']:not(:disabled))::file-selector-button {
+	cursor: pointer;
+}
+
+/**
+ * Improve paragraph line breaks.
+ */
+:where(p) {
+	text-wrap: pretty;
+}
+
+/**
+ * Balance heading lines to avoid
+ * lonely words on a separate line.
+ */
+:where(h1, h2, h3, h4, h5, h6) {
+	text-wrap: balance;
+}
+
+/**
+ * Let textareas resize in the block direction only.
+ */
+:where(textarea) {
+	resize: block;
+}
+
+/**
+ * Give textareas without explicit rows a useful starting height.
+ */
+:where(textarea:not([rows])) {
+	min-block-size: 3em;
+}
+
+/**
+ * Offset anchor targets from sticky or tight viewport edges.
+ */
+:where(:target) {
+	scroll-margin-block: 5vb;
+}
+
+/**
+ * Provide a high-contrast keyboard focus outline.
+ * 1. Draw the outline with the system highlight color.
+ * 2. Keep the outline away from the element edge.
+ */
+:where(:focus-visible) {
+	outline: 4px solid Highlight; /* 1 */
+	outline-offset: 4px; /* 2 */
+}
+
+/**
+ * Keep long preformatted lines inside their container.
+ */
+:where(pre) {
+	overflow: auto;
+}

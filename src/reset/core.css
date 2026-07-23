@@ -1,0 +1,421 @@
+/**
+ * Use a predictable box model.
+ */
+*, ::before, ::after {
+	box-sizing: border-box;
+}
+
+/**
+ * Remove browser-provided spacing everywhere.
+ */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/**
+ * Let form controls and indicators blend into surrounding typography.
+ */
+:where(input, button, textarea, select, progress, meter) {
+	color: inherit;
+	font: inherit;
+	letter-spacing: inherit;
+	word-spacing: inherit;
+}
+
+/**
+ * Reset iOS WebKit's reduced opacity for disabled controls.
+ * https://github.com/WebKit/WebKit/blob/9dd0abc261828479fac8134d26d7138b962df5a3/Source/WebCore/css/html.css#L938-L947
+ */
+:where(input:disabled, textarea:disabled) {
+	opacity: 1;
+}
+
+/**
+ * Reset placeholder opacity in older Firefox releases.
+ * Firefox 132 (29 October 2024) moved the faded appearance into `color`.
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=1470025
+ */
+::placeholder {
+	/* TODO(2027-04-29): Remove when Firefox 132 (29 October 2024) behavior is Baseline Widely Available. */
+	opacity: 1;
+}
+
+/**
+ * Remove native field chrome.
+ */
+:where(input, textarea, select) {
+	background: none;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	appearance: none;
+}
+
+/**
+ * Remove progress and meter chrome.
+ */
+:where(progress, meter) {
+	vertical-align: baseline;
+	background: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	appearance: none;
+}
+
+/**
+ * Remove browser-specific track and value painting that remains after
+ * `appearance: none`. Keep WebKit and Firefox pseudo-elements separate.
+ * https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/core/html/resources/html.css
+ * https://searchfox.org/firefox-main/source/layout/style/res/forms.css#1197-1324
+ */
+:where(progress)::-webkit-progress-bar,
+:where(progress)::-webkit-progress-value,
+:where(meter)::-webkit-meter-bar,
+:where(meter)::-webkit-meter-optimum-value,
+:where(meter)::-webkit-meter-suboptimum-value,
+:where(meter)::-webkit-meter-even-less-good-value {
+	background: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+:where(progress)::-moz-progress-bar,
+:where(meter)::-moz-meter-bar {
+	background: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+/**
+ * Make links inherit surrounding text styling.
+ */
+:where(a) {
+	color: currentColor;
+	text-decoration: inherit;
+}
+
+/**
+ * Keep titled abbreviations recognizable before Safari 26.2 (12 December 2025).
+ * https://bugs.webkit.org/show_bug.cgi?id=277889
+ */
+:where(abbr[title]) {
+	/* TODO(2028-06-12): Remove when Safari 26.2 (12 December 2025) behavior is Baseline Widely Available. */
+	/* stylelint-disable-next-line property-no-vendor-prefix -- Safari before 26.2 (12 December 2025) requires it */
+	-webkit-text-decoration: underline dotted;
+	text-decoration: underline dotted;
+}
+
+/**
+ * Reset button chrome while preserving
+ * natural sizing and inherited alignment.
+ */
+:where(button) {
+	inline-size: auto;
+	text-align: inherit;
+	background: none;
+	border: 0;
+	box-shadow: none;
+	appearance: none;
+}
+
+/**
+ * Reset the fully styleable button inside file inputs.
+ */
+::file-selector-button {
+	box-sizing: border-box;
+	inline-size: auto;
+	margin: 0;
+	padding: 0;
+	color: inherit;
+	font: inherit;
+	letter-spacing: inherit;
+	text-align: inherit;
+	text-indent: 0;
+	text-transform: inherit;
+	word-spacing: inherit;
+	background: none;
+	border: 0;
+	box-shadow: none;
+	appearance: none;
+}
+
+/**
+ * Remove dialog chrome.
+ */
+:where(dialog) {
+	color: inherit;
+	background: none;
+	border: 0;
+	box-shadow: none;
+}
+
+/**
+ * Leave dialog backdrop presentation to the design system.
+ */
+:where(dialog)::backdrop {
+	background: none;
+}
+
+/**
+ * Remove the inline baseline gap from embedded media.
+ * Using these elements in an inline context is very rare and can be opted into locally.
+ */
+:where(audio, canvas, embed, iframe, img, object, picture, svg, video) {
+	display: block flow;
+}
+
+/**
+ * Keep embedded media responsive inside its container.
+ * Audio retains its UA block size because its native controls
+ * do not provide a reliable intrinsic height in every browser.
+ */
+:where(audio, canvas, img, svg, video) {
+	max-inline-size: 100%;
+}
+
+:where(canvas, img, svg, video) {
+	block-size: auto;
+}
+
+/**
+ * Prevent embedded documents and form controls from overflowing.
+ */
+:where(embed, iframe, input, object, select, textarea) {
+	max-inline-size: 100%;
+}
+
+/**
+ * Normalize table borders and cell spacing.
+ * Safari before 18.4 (31 March 2025) and
+ * Chromium before Chrome 149 (2 June 2026)
+ * use a gray UA border color.
+ */
+:where(table) {
+	border-collapse: collapse;
+	border-spacing: 0;
+
+	/* TODO(2028-12-02): Remove when Chrome 149 (2 June 2026) behavior is Baseline Widely Available. */
+	border-color: currentColor;
+}
+
+/**
+ * Align captions and table headers
+ * with the document writing direction.
+ */
+:where(caption, th) {
+	text-align: start;
+}
+
+/**
+ * Remove default borders from framed content containers.
+ */
+:where(fieldset, iframe) {
+	border: 0;
+}
+
+/**
+ * Strip heading emphasis so scale and
+ * weight come only from component styles.
+ */
+:where(h1, h2, h3, h4, h5, h6) {
+	font-size: 100%;
+	font-weight: 400;
+}
+
+/**
+ * Match the HTML default before Chrome 135 (1 April 2025)
+ * and Safari 26 (15 September 2025).
+ */
+:where(b, strong) {
+	/* TODO(2028-03-15): Remove when Safari 26 (15 September 2025) behavior is Baseline Widely Available. */
+	font-weight: bolder;
+}
+
+/**
+ * Remove list markers while keeping list semantics intact.
+ */
+:where(ul, ol, menu) {
+	list-style-type: '';
+}
+
+/**
+ * Normalize disclosure layout before Safari 18.4 (31 March 2025),
+ * then remove its marker without changing details open/closed behavior.
+ */
+:where(summary) {
+	/* TODO(2027-10-01): Remove when Safari 18.4 (31 March 2025) behavior is Baseline Widely Available. */
+	display: block flow list-item;
+	list-style: none;
+}
+
+:where(summary)::-webkit-details-marker {
+	display: none;
+}
+
+/**
+ * Preserve the native hidden behavior, but keep `until-found` searchable.
+ * https://html.spec.whatwg.org/multipage/rendering.html#hidden-elements
+ */
+:where([hidden]:not([hidden='until-found' i], embed)) {
+	display: none !important;
+}
+
+/**
+ * Keep hidden embeds rendered as zero-sized inline boxes.
+ * https://html.spec.whatwg.org/multipage/rendering.html#hidden-elements
+ * Firefox currently misses the zero-size UA styles.
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=1852037
+ */
+:where(embed[hidden]) {
+	display: inline flow;
+	inline-size: 0;
+	block-size: 0;
+}
+
+/**
+ * Make horizontal rules simple one-pixel separators.
+ */
+:where(hr) {
+	border: 0;
+	border-block-start: 1px solid currentColor;
+}
+
+/**
+ * Hide WebKit search input decorations.
+ */
+:where(input[type='search'])::-webkit-search-decoration,
+:where(input[type='search'])::-webkit-search-cancel-button,
+:where(input[type='search'])::-webkit-search-results-button,
+:where(input[type='search'])::-webkit-search-results-decoration {
+	display: none;
+	appearance: none;
+}
+
+/**
+ * Normalize editable date and time fields after removing native chrome.
+ * 1. Keep empty iOS fields at least one line tall.
+ * 2. Honor non-start alignment in iOS Safari, though it is uncommon for text fields.
+ * 3. Remove internal block padding that survives the universal spacing reset.
+ *
+ * Keep the UA display unchanged: `inline-flex` regresses Chromium alignment.
+ *
+ * Do not compensate for iOS Safari making a styled date input 1px shorter than an equivalent text input.
+ * Desktop has no mismatch, so a shadow-tree `+1px` would regress it;
+ * exact host sizing belongs to component styles.
+ *
+ * https://bugs.webkit.org/show_bug.cgi?id=198959
+ * https://github.com/WebKit/WebKit/blob/9dd0abc261828479fac8134d26d7138b962df5a3/Source/WebCore/css/html.css#L509-L547
+ */
+:where(input)::-webkit-date-and-time-value {
+	min-block-size: 1lh; /* 1 */
+	text-align: inherit; /* 2 */
+}
+
+:where(input)::-webkit-datetime-edit-fields-wrapper,
+:where(input)::-webkit-datetime-edit,
+:where(input)::-webkit-datetime-edit-year-field,
+:where(input)::-webkit-datetime-edit-month-field,
+:where(input)::-webkit-datetime-edit-day-field,
+:where(input)::-webkit-datetime-edit-hour-field,
+:where(input)::-webkit-datetime-edit-minute-field,
+:where(input)::-webkit-datetime-edit-second-field,
+:where(input)::-webkit-datetime-edit-millisecond-field,
+:where(input)::-webkit-datetime-edit-meridiem-field {
+	padding-block: 0; /* 3 */
+}
+
+/**
+ * Normalize browser-specific pixel dimensions to a neutral square.
+ * Chromium uses 50x27px; Firefox uses 64x32px.
+ * https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/core/html/resources/html.css
+ * https://searchfox.org/firefox-main/source/layout/style/res/forms.css#508-512
+ */
+:where(input[type='color']) {
+	inline-size: 24px;
+	block-size: 24px;
+}
+
+/**
+ * Remove browser-provided spacing and borders around color swatches.
+ * Keep vendor pseudo-elements in separate rules: an unsupported
+ * pseudo-element invalidates the entire selector list.
+ */
+:where(input[type='color'])::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+
+:where(input[type='color'])::-webkit-color-swatch {
+	border: 0;
+}
+
+:where(input[type='color'])::-moz-color-swatch {
+	border: 0;
+}
+
+/**
+ * Hide date and time picker indicators where browsers expose them.
+ * This also removes the native UI trigger; provide one using `showPicker()`.
+ * Firefox does not provide an author-facing pseudo-element.
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=1830890
+ */
+:where(
+	input:is(
+		[type='date'],
+		[type='datetime-local'],
+		[type='month'],
+		[type='time'],
+		[type='week']
+	)
+)::-webkit-calendar-picker-indicator {
+	display: none;
+}
+
+/**
+ * Remove number field spin controls.
+ * Firefox keeps them with `appearance: none` and requires `textfield`.
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=1786154
+ */
+:where(input[type='number']) {
+	appearance: textfield;
+}
+
+/*
+ * The alternative outer stepper was removed
+ * in Chrome 14 (16 September 2011) and Safari 6 (25 July 2012).
+ * https://bugs.webkit.org/show_bug.cgi?id=61845
+ */
+:where(input)::-webkit-inner-spin-button {
+	appearance: none;
+}
+
+/**
+ * Normalize browser-specific range slider thumbs to 16x16px.
+ * Chromium uses 16px in its native theme; Firefox uses 1em plus a border.
+ * Keep vendor pseudo-elements in separate rules because an unsupported
+ * pseudo-element invalidates the entire selector list.
+ * https://chromium.googlesource.com/chromium/src/+/refs/heads/main/ui/native_theme/native_theme_base.cc#46
+ * https://searchfox.org/firefox-main/source/layout/style/res/forms.css#758-777
+ */
+:where(input[type='range'])::-webkit-slider-thumb {
+	inline-size: 16px;
+	block-size: 16px;
+	background: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	appearance: none;
+}
+
+:where(input[type='range'])::-moz-range-thumb {
+	inline-size: 16px;
+	block-size: 16px;
+	background: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	appearance: none;
+}

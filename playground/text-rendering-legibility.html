@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-rendering="legibility">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>optimizeLegibility profile · @morev/css playground</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display&amp;display=block"
+		/>
+		<link rel="stylesheet" href="./text-rendering.css" />
+		<link rel="stylesheet" href="./text-rendering-profile.css" />
+		<script type="module" src="./text-rendering-profile.js"></script>
+		<meta
+			name="description"
+			content="An isolated large-text profile target using text-rendering optimizeLegibility."
+		/>
+	</head>
+	<body class="profile-page">
+		<header class="profile-header">
+			<div>
+				<p class="section-eyebrow">Isolated DevTools target</p>
+				<h1>
+					<code>text-rendering: optimizeLegibility</code>
+				</h1>
+				<p>
+					Record a Performance profile, then re-render or scroll through the corpus.
+				</p>
+			</div>
+			<div class="profile-header__actions">
+				<a
+					class="button button--secondary"
+					href="./text-rendering.html"
+				>Back to benchmark</a>
+				<a
+					id="other-profile-link"
+					class="button button--secondary"
+					href="./text-rendering-speed.html?paragraphs=2000"
+				>Open optimizeSpeed</a>
+				<button
+					id="rerender-profile"
+					class="button"
+					type="button"
+					disabled
+				>Re-render corpus</button>
+			</div>
+		</header>
+
+		<main class="profile-main">
+			<section class="profile-information">
+				<p
+					id="profile-status"
+					class="profile-status"
+					role="status"
+					aria-live="polite"
+				>Preparing corpus…</p>
+				<dl class="profile-facts">
+					<div class="profile-fact">
+						<dt>Computed value</dt>
+						<dd id="profile-computed-value">—</dd>
+					</div>
+					<div class="profile-fact">
+						<dt>Computed font-family</dt>
+						<dd id="profile-font">—</dd>
+					</div>
+					<div class="profile-fact">
+						<dt>Control-line width</dt>
+						<dd id="profile-probe-width">—</dd>
+					</div>
+					<div class="profile-fact">
+						<dt>Paragraphs</dt>
+						<dd id="profile-paragraph-count">—</dd>
+					</div>
+				</dl>
+				<div id="profile-probe" class="profile-probe"></div>
+			</section>
+
+			<div id="profile-corpus" class="profile-corpus"></div>
+		</main>
+	</body>
+</html>

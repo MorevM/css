@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Fixed embedded document</title>
+		<link rel="stylesheet" href="./embedded-document.css" />
+		<meta
+			name="description"
+			content="A fixed-size document used to demonstrate embedded viewport sizing."
+		/>
+	</head>
+	<body>
+		<main class="fixed-surface">
+			<p class="fixed-surface__eyebrow">Inner HTML document</p>
+			<h1 class="fixed-surface__title">Fixed content: 720 × 240</h1>
+			<p class="fixed-surface__description">
+				The outer element is a viewport. It does not inherit this document’s dimensions or aspect ratio.
+			</p>
+			<div
+				class="fixed-surface__axis"
+				aria-hidden="true"
+			>← 720px internal width →</div>
+		</main>
+	</body>
+</html>

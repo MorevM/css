@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>@morev/css reset playground</title>
+		<link rel="stylesheet" href="./index.css" />
+		<script type="module" src="./index.js"></script>
+		<meta
+			name="description"
+			content="Side-by-side playground for the @morev/css reset stylesheets."
+		/>
+	</head>
+	<body>
+		<header class="page-header">
+			<div>
+				<p class="page-header__eyebrow">@morev/css</p>
+				<h1 class="page-header__title">Reset playground</h1>
+				<p class="page-header__description">
+					The same specimens rendered with browser defaults and with
+					<code>core.css</code>
+					+
+					<code>base.css</code>
+					+
+					<code>reduced-motion.css</code>
+					.
+				</p>
+			</div>
+
+			<div class="toolbar" aria-label="Playground controls">
+				<label class="toolbar__toggle">
+					<input id="sync-toggle" type="checkbox" checked />
+					Synchronize scrolling
+				</label>
+
+				<a
+					class="toolbar__button"
+					href="./text-rendering.html"
+				>Text rendering benchmark</a>
+
+				<button
+					id="scroll-reset"
+					class="toolbar__button"
+					type="button"
+				>Back to top</button>
+			</div>
+		</header>
+
+		<main class="comparison">
+			<section class="comparison-pane" aria-labelledby="native-title">
+				<header class="comparison-pane__header">
+					<div>
+						<p class="comparison-pane__status">Reference</p>
+						<h2 id="native-title" class="comparison-pane__title">Browser defaults</h2>
+					</div>
+					<a href="./frame.html?mode=native" target="_blank">Open separately</a>
+				</header>
+
+				<iframe
+					id="native-frame"
+					class="comparison-pane__frame"
+					src="./frame.html?mode=native"
+					title="Elements rendered with browser default styles"
+				></iframe>
+			</section>
+
+			<section class="comparison-pane" aria-labelledby="reset-title">
+				<header class="comparison-pane__header">
+					<div>
+						<p class="comparison-pane__status comparison-pane__status--active">Under test</p>
+						<h2 id="reset-title" class="comparison-pane__title">@morev/css reset</h2>
+					</div>
+					<a
+						href="./frame.html?mode=reset"
+						target="_blank"
+					>
+						Open separately
+					</a>
+				</header>
+
+				<iframe
+					id="reset-frame"
+					class="comparison-pane__frame"
+					src="./frame.html?mode=reset"
+					title="Elements rendered with the @morev/css reset"
+				></iframe>
+			</section>
+		</main>
+
+		<aside
+			id="inspector"
+			class="inspector"
+			aria-labelledby="inspector-title"
+			hidden
+		>
+			<header class="inspector__header">
+				<div>
+					<p class="inspector__eyebrow">Reset declaration and resolved result</p>
+					<h2 id="inspector-title" class="inspector__title">Specimen</h2>
+				</div>
+				<div class="inspector__actions">
+					<label class="inspector__toggle">
+						<input id="show-unchanged-toggle" type="checkbox" />
+						Show unchanged
+					</label>
+					<button
+						id="close-inspector"
+						class="inspector__close"
+						type="button"
+					>Close</button>
+				</div>
+			</header>
+			<div
+				id="inspector-content"
+				class="inspector__content"
+				aria-live="polite"
+			></div>
+		</aside>
+
+		<footer class="page-footer">
+			<p>
+				“Preserved” means that no dedicated neutralization targets that native presentation.
+				Universal structural rules can still apply to the element.
+			</p>
+		</footer>
+	</body>
+</html>

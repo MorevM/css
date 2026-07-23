@@ -1,0 +1,36 @@
+/**
+ * Restrict motion for users who request it.
+ * 1. Remove scroll-linked movement from fixed backgrounds.
+ * 2. Disable smooth scrolling, including in nested containers.
+ * 3. Shorten transitions.
+ * 4. Shorten animations to a single iteration.
+ */
+*, ::before, ::after, ::marker, ::backdrop {
+	@media (prefers-reduced-motion: reduce) {
+		background-attachment: initial !important; /* 1 */
+		scroll-behavior: auto !important; /* 2 */
+		transition-duration: .01ms !important; /* 3 */
+		transition-delay: .01ms !important;
+		animation-duration: .01ms !important; /* 4 */
+		animation-delay: .01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}
+
+/**
+ * Restrict motion in the browser-generated View Transition tree.
+ * https://drafts.csswg.org/css-view-transitions-1/#view-transition-pseudo-tree
+ */
+:root::view-transition,
+:root::view-transition-group(*),
+:root::view-transition-image-pair(*),
+:root::view-transition-old(*),
+:root::view-transition-new(*) {
+	@media (prefers-reduced-motion: reduce) {
+		transition-duration: .01ms !important;
+		transition-delay: .01ms !important;
+		animation-duration: .01ms !important;
+		animation-delay: .01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}
