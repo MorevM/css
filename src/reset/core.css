@@ -161,6 +161,14 @@
 }
 
 /**
+ * Remove the inline baseline gap from embedded media.
+ * Using these elements in an inline context is very rare and can be opted into locally.
+ */
+:where(audio, canvas, embed, iframe, img, object, picture, svg, video) {
+	display: block flow;
+}
+
+/**
  * Keep embedded media responsive inside its container.
  * Audio retains its UA block size because its native controls
  * do not provide a reliable intrinsic height in every browser.
@@ -178,14 +186,6 @@
  */
 :where(embed, iframe, input, object, select, textarea) {
 	max-inline-size: 100%;
-}
-
-/**
- * Remove the inline baseline gap from embedded media.
- * Using these elements in an inline context is very rare and can be opted into locally.
- */
-:where(audio, canvas, embed, iframe, img, object, picture, svg, video) {
-	display: block flow;
 }
 
 /**
@@ -257,8 +257,7 @@
 }
 
 /**
- * Preserve the native hidden behavior,
- * but keep `until-found` searchable.
+ * Preserve the native hidden behavior, but keep `until-found` searchable.
  * https://html.spec.whatwg.org/multipage/rendering.html#hidden-elements
  */
 :where([hidden]:not([hidden='until-found' i], embed)) {
@@ -267,8 +266,8 @@
 
 /**
  * Keep hidden embeds rendered as zero-sized inline boxes.
- * Firefox currently misses the zero-size UA styles.
  * https://html.spec.whatwg.org/multipage/rendering.html#hidden-elements
+ * Firefox currently misses the zero-size UA styles.
  * https://bugzilla.mozilla.org/show_bug.cgi?id=1852037
  */
 :where(embed[hidden]) {

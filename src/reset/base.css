@@ -15,6 +15,7 @@
  * 4. Use the non-standard Firefox font-smoothing API on macOS; it has no unprefixed equivalent.
  *    https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-smooth
  * 5. Ask the browser to prioritize legibility.
+ *    There is no significant performance overhead: https://bugs.webkit.org/show_bug.cgi?id=41363
  * 6. Make tab stops compact in preformatted content (default is 8).
  * 7. Remove the iOS Safari tap highlight through its non-standard API; it has no unprefixed equivalent.
  *    https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariCSSRef/
@@ -213,7 +214,7 @@
  * Give textareas without explicit rows a useful starting height.
  */
 :where(textarea:not([rows])) {
-	min-block-size: 10em;
+	min-block-size: 3em;
 }
 
 /**
