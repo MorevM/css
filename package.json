@@ -1,8 +1,10 @@
 {
 	"name": "@morev/css",
-	"description": "Template repository to start projects with",
+	"description": "Modern CSS foundation",
 	"type": "module",
-	"private": true,
+	"sideEffects": [
+		"**/*.css"
+	],
 	"version": "0.0.0",
 	"engines": {
 		"node": ">=24"
@@ -16,24 +18,36 @@
 		"name": "Maxim Morev",
 		"email": "max.seainside@gmail.com"
 	},
-	"homepage": "https://github.com/MorevM/template-repository#readme",
+	"homepage": "https://github.com/MorevM/css#readme",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/MorevM/template-repository"
+		"url": "https://github.com/MorevM/css"
 	},
-	"keywords": [],
+	"bugs": {
+		"url": "https://github.com/MorevM/css/issues"
+	},
+	"keywords": [
+		"baseline",
+		"css",
+		"css-reset",
+		"design-system",
+		"reset"
+	],
 	"files": [
 		"dist"
 	],
 	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js"
-		}
+		"./reset.css": "./dist/reset.css",
+		"./reset.min.css": "./dist/reset.min.css",
+		"./reset/base.css": "./dist/reset/base.css",
+		"./reset/base.min.css": "./dist/reset/base.min.css",
+		"./reset/controls.css": "./dist/reset/controls.css",
+		"./reset/controls.min.css": "./dist/reset/controls.min.css",
+		"./reset/core.css": "./dist/reset/core.css",
+		"./reset/core.min.css": "./dist/reset/core.min.css",
+		"./reset/reduced-motion.css": "./dist/reset/reduced-motion.css",
+		"./reset/reduced-motion.min.css": "./dist/reset/reduced-motion.min.css"
 	},
-	"main": "./dist/index.cjs",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.ts",
 	"scripts": {
 		"prepare": "lefthook install",
 		"test": "vitest",
@@ -46,26 +60,27 @@
 		"lint:eslint:fix": "eslint . --fix",
 		"lint:stylelint": "stylelint \"**/*.{css,scss}\" --allow-empty-input",
 		"lint:stylelint:fix": "stylelint \"**/*.{css,scss}\" --fix --allow-empty-input",
-		"build": "tsdown",
+		"build": "pnpm run build:css",
+		"build:css": "node ./scripts/build-css.js",
 		"release": "release-it --disable-metrics"
-	},
-	"dependencies": {
-		"@morev/utils": "^3.15.0"
 	},
 	"devDependencies": {
 		"@cspell/dict-ru_ru": "^2.3.2",
 		"@morev/commitlint-config": "^0.2.2",
 		"@morev/eslint-config": "^42.0.2",
 		"@morev/stylelint-config": "^9.0.2",
+		"@morev/utils": "^3.15.0",
 		"@release-it/conventional-changelog": "^8.0.1",
 		"@types/node": "^24.12.2",
 		"cspell": "^10.0.1",
+		"esbuild": "^0.25.12",
 		"eslint": "10.7.0",
 		"lefthook": "^2.1.10",
 		"release-it": "^20.2.1",
 		"stylelint": "^17.14.0",
 		"tsdown": "^0.22.9",
 		"typescript": "^6.0.3",
+		"vite": "^6.3.5",
 		"vitest": "^4.1.10"
 	}
 }
