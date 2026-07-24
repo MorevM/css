@@ -75,7 +75,6 @@
  * 1. Smooth in-page navigation by default.
  * 2. Allow transitions to and from intrinsic size keywords.
  */
-/* stylelint-disable-next-line no-duplicate-selectors -- Root defaults and interaction behavior are separate domains. */
 :where(:root) {
 	scroll-behavior: smooth; /* 1 */
 	interpolate-size: allow-keywords; /* 2 */
@@ -225,13 +224,26 @@
 }
 
 /**
- * Provide a high-contrast keyboard focus outline.
- * 1. Draw the outline with the system highlight color.
- * 2. Keep the outline away from the element edge.
+ * Provide a predictable keyboard focus outline.
+ * 1. Use a solid outline because the geometry of `auto` may be affected by descendant boxes;
+ *    Chromium, for example, may draw the focus ring around them:
+ *    https://drafts.csswg.org/css-ui-4/#outline-style
+ *    https://t.me/morev_online/62
+ * 2. Prefer the system `Highlight` color to `currentColor`: it follows the used color scheme
+ *    and is not coupled to a component's possibly inverted text color, which may match the
+ *    surrounding surface:
+ *    https://drafts.csswg.org/css-color-4/#css-system-colors
+ * 3. A two-color `stripes(Canvas, CanvasText)` outline would handle arbitrary backgrounds
+ *    more reliably, but browser implementations are still pending:
+ *    https://drafts.csswg.org/css-ui-4/#outline-color
+ *    https://drafts.csswg.org/css-images-4/#funcdef-stripes
+ *    https://bugzilla.mozilla.org/show_bug.cgi?id=1848458
+ *    https://bugs.webkit.org/show_bug.cgi?id=277549
+ * 4. Keep the outline away from the element edge.
  */
 :where(:focus-visible) {
-	outline: 4px solid Highlight; /* 1 */
-	outline-offset: 4px; /* 2 */
+	outline: 4px solid Highlight; /* 1, 2, 3 */
+	outline-offset: 4px; /* 4 */
 }
 
 /**
