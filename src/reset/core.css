@@ -1,8 +1,17 @@
 /**
  * Use a predictable box model.
  */
-*, ::before, ::after {
+* {
 	box-sizing: border-box;
+}
+
+/**
+ * Let pseudo-elements follow their originating element's box model
+ * without propagating overrides through its subtree.
+ */
+::before,
+::after {
+	box-sizing: inherit;
 }
 
 /**
