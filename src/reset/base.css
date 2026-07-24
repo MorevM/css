@@ -75,7 +75,6 @@
  * 1. Smooth in-page navigation by default.
  * 2. Allow transitions to and from intrinsic size keywords.
  */
-/* stylelint-disable-next-line no-duplicate-selectors -- Root defaults and interaction behavior are separate domains. */
 :where(:root) {
 	scroll-behavior: smooth; /* 1 */
 	interpolate-size: allow-keywords; /* 2 */
