@@ -9,6 +9,8 @@ const inspectorTitle = document.querySelector('#inspector-title');
 const inspectorContent = document.querySelector('#inspector-content');
 const showUnchangedToggle = document.querySelector('#show-unchanged-toggle');
 const closeInspector = document.querySelector('#close-inspector');
+const comparison = document.querySelector('.comparison');
+const comparisonDivider = document.querySelector('#comparison-divider');
 const comparisonPaneHeaders = [...document.querySelectorAll('.comparison-pane__header')];
 const splitViewMedia = window.matchMedia('(width >= 44rem)');
 const alignedElementSelectors = [
@@ -22,6 +24,37 @@ const alignedSectionSelector = '.showcase-section';
 let isSynchronizingScroll = false;
 let alignmentFrameId;
 let inspectedSpecimenIndex;
+let mobileSplitPercentage = 50;
+let dividerPointerOffset = 0;
+
+const minimumMobileSplitPercentage = Number(comparisonDivider.getAttribute('aria-valuemin'));
+const maximumMobileSplitPercentage = Number(comparisonDivider.getAttribute('aria-valuemax'));
+
+const renderMobileSplit = () => {
+	if (splitViewMedia.matches) {
+		comparison.style.removeProperty('--mobile-first-pane-size');
+		return;
+	}
+
+	const dividerBlockSize = comparisonDivider.getBoundingClientRect().height;
+	const availableBlockSize = comparison.clientHeight - dividerBlockSize;
+
+	if (availableBlockSize <= 0) return;
+
+	comparison.style.setProperty(
+		'--mobile-first-pane-size',
+		`${availableBlockSize * mobileSplitPercentage / 100}px`,
+	);
+	comparisonDivider.setAttribute('aria-valuenow', String(Math.round(mobileSplitPercentage)));
+};
+
+const setMobileSplit = (percentage) => {
+	mobileSplitPercentage = Math.min(
+		maximumMobileSplitPercentage,
+		Math.max(minimumMobileSplitPercentage, percentage),
+	);
+	renderMobileSplit();
+};
 
 const synchronizeScroll = (sourceFrame, targetFrame) => {
 	if (!syncToggle.checked || isSynchronizingScroll) return;
@@ -512,6 +545,42 @@ const handleFrameLoad = () => {
 	if (inspectedSpecimenIndex !== undefined) requestAnimationFrame(renderInspector);
 };
 
+comparisonDivider.addEventListener('pointerdown', (event) => {
+	if (splitViewMedia.matches) return;
+
+	const dividerRectangle = comparisonDivider.getBoundingClientRect();
+
+	dividerPointerOffset = event.clientY - dividerRectangle.top - dividerRectangle.height / 2;
+	comparisonDivider.setPointerCapture(event.pointerId);
+});
+
+comparisonDivider.addEventListener('pointermove', (event) => {
+	if (!comparisonDivider.hasPointerCapture(event.pointerId)) return;
+
+	const comparisonRectangle = comparison.getBoundingClientRect();
+	const dividerBlockSize = comparisonDivider.getBoundingClientRect().height;
+	const availableBlockSize = comparisonRectangle.height - dividerBlockSize;
+	const firstPaneBlockSize = event.clientY
+		- dividerPointerOffset
+		- comparisonRectangle.top
+		- dividerBlockSize / 2;
+
+	setMobileSplit(firstPaneBlockSize / availableBlockSize * 100);
+});
+
+comparisonDivider.addEventListener('keydown', (event) => {
+	let nextPercentage;
+
+	if (event.key === 'ArrowUp') nextPercentage = mobileSplitPercentage - 5;
+	else if (event.key === 'ArrowDown') nextPercentage = mobileSplitPercentage + 5;
+	else if (event.key === 'Home') nextPercentage = minimumMobileSplitPercentage;
+	else if (event.key === 'End') nextPercentage = maximumMobileSplitPercentage;
+	else return;
+
+	event.preventDefault();
+	setMobileSplit(nextPercentage);
+});
+
 window.addEventListener('message', (event) => {
 	const isKnownFrame = event.source === nativeFrame.contentWindow || event.source === resetFrame.contentWindow;
 
@@ -528,8 +597,14 @@ window.addEventListener('message', (event) => {
 
 nativeFrame.addEventListener('load', handleFrameLoad);
 resetFrame.addEventListener('load', handleFrameLoad);
-window.addEventListener('load', scheduleAlignment);
-window.addEventListener('resize', scheduleAlignment);
+window.addEventListener('load', () => {
+	renderMobileSplit();
+	scheduleAlignment();
+});
+window.addEventListener('resize', () => {
+	renderMobileSplit();
+	scheduleAlignment();
+});
 
 showUnchangedToggle.addEventListener('change', renderInspector);
 closeInspector.addEventListener('click', hideInspector);

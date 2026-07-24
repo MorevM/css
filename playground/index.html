@@ -36,13 +36,17 @@
 				<a
 					class="toolbar__button"
 					href="./text-rendering.html"
-				>Text rendering benchmark</a>
+				>Text Rendering Benchmark</a>
 
 				<button
 					id="scroll-reset"
 					class="toolbar__button"
 					type="button"
-				>Back to top</button>
+					aria-label="Back to top"
+				>
+					<span class="toolbar__button-label">Back to top</span>
+					<span class="toolbar__button-label toolbar__button-label--compact">Top</span>
+				</button>
 			</div>
 		</header>
 
@@ -63,6 +67,20 @@
 					title="Elements rendered with browser default styles"
 				></iframe>
 			</section>
+
+			<button
+				id="comparison-divider"
+				class="comparison-divider"
+				type="button"
+				role="separator"
+				aria-label="Resize comparison panes"
+				aria-orientation="horizontal"
+				aria-valuemin="20"
+				aria-valuemax="80"
+				aria-valuenow="50"
+			>
+				<span class="comparison-divider__handle" aria-hidden="true"></span>
+			</button>
 
 			<section class="comparison-pane" aria-labelledby="reset-title">
 				<header class="comparison-pane__header">
