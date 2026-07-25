@@ -1,9 +1,12 @@
 /**
- * Let flex and grid children shrink instead of forcing overflow.
- * https://css-tricks.com/preventing-a-grid-blowout/
+ * 1. Let flex and grid children shrink instead of forcing overflow.
+ *    https://css-tricks.com/preventing-a-grid-blowout/
+ * 2. Keep decorative background images from tiling by default.
+ *    https://wiki.csswg.org/ideas/mistakes/
  */
 *, ::before, ::after {
-	min-inline-size: 0;
+	min-inline-size: 0; /* 1 */
+	background-repeat: no-repeat; /* 2 */
 }
 
 /**
