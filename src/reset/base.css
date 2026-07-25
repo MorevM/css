@@ -9,7 +9,9 @@
 /**
  * Establish document-wide typography and platform behavior.
  * 1. Use the system UI font stack.
- * 2. Set a readable default line height.
+ * 2. Set a readable default line height matching the value recommended by WCAG.
+ *    https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation
+ *    https://www.w3.org/WAI/WCAG22/Understanding/text-spacing
  * 3. Use the non-standard WebKit/Blink font-smoothing API on macOS; it has no unprefixed equivalent.
  *    https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-smooth
  * 4. Use the non-standard Firefox font-smoothing API on macOS; it has no unprefixed equivalent.
