@@ -194,7 +194,12 @@
 			[type='checkbox'],
 			[type='radio']
 		)
-	):not(:disabled)
+	):not(:disabled),
+	:where(
+		[role='button'],
+		[role='tab'],
+		[role='menuitem']
+	):not([aria-disabled='true'])
 ) {
 	cursor: pointer;
 }

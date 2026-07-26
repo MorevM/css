@@ -638,6 +638,10 @@
 	border: 1px solid currentColor;
 }
 
+.cursor-grid input[type='radio'] {
+	border-radius: 50%;
+}
+
 .text-constraint {
 	inline-size: min(100%, 25rem);
 	margin-block-start: 1rem;
