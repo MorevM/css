@@ -1328,7 +1328,7 @@
 				<article class="specimen">
 					<header class="specimen__header">
 						<span class="status status--mixed">Conditional</span>
-						<code>label, summary, enabled native controls</code>
+						<code>label, summary, enabled native controls and common interactive roles</code>
 					</header>
 					<h3 class="specimen__title">Pointer cursor matrix</h3>
 					<div class="cursor-grid">
@@ -1352,6 +1352,19 @@
 						<input id="cursor-file" type="file" />
 						<input id="cursor-checkbox" type="checkbox" aria-label="Checkbox" />
 						<input id="cursor-radio" type="radio" aria-label="Radio" />
+						<div id="cursor-role-button" role="button" tabindex="0">role button</div>
+						<div id="cursor-role-tab" role="tab" tabindex="0">role tab</div>
+						<div
+							id="cursor-role-menuitem"
+							role="menuitem"
+							tabindex="0"
+						>role menuitem</div>
+						<div
+							id="cursor-disabled-role-button"
+							role="button"
+							tabindex="0"
+							aria-disabled="true"
+						>disabled role button</div>
 					</div>
 					<output
 						class="computed-values"
@@ -1372,6 +1385,16 @@
 						class="computed-values"
 						data-computed-for="#cursor-file"
 						data-pseudo="::file-selector-button"
+						data-properties="cursor"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#cursor-role-button"
+						data-properties="cursor"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#cursor-disabled-role-button"
 						data-properties="cursor"
 					></output>
 				</article>
