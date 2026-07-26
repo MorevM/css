@@ -200,8 +200,7 @@
 }
 
 /**
- * Balance heading lines to avoid
- * lonely words on a separate line.
+ * Balance heading lines to avoid lonely words on a separate line.
  */
 :where(h1, h2, h3, h4, h5, h6) {
 	text-wrap: balance;
