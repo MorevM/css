@@ -245,7 +245,10 @@
 }
 
 /**
- * Remove list markers while keeping list semantics intact.
+ * Remove list markers without `list-style: none`.
+ * Safari can omit lists styled with `none` from the accessibility tree;
+ * an empty marker string renders no marker while preserving list semantics.
+ * https://bugs.webkit.org/show_bug.cgi?id=170179
  */
 :where(ul, ol, menu) {
 	list-style-type: '';
