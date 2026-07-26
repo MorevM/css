@@ -1042,6 +1042,67 @@
 				<article class="specimen">
 					<header class="specimen__header">
 						<span class="status status--affected">Affected</span>
+						<code>code, time, table</code>
+					</header>
+					<h3 class="specimen__title">Code, time and table numerals</h3>
+					<p class="specimen__description">
+						Code uses fixed-width numerals and a slashed zero when available. Fixed-width numerals also keep changing
+						time values stable and make numerical table columns easier to scan.
+					</p>
+					<div class="specimen__stage specimen__stage--columns">
+						<code
+							id="numeric-code"
+							class="numeric-code-demo"
+						>int LOOP_010 = 200;</code>
+						<div class="numeric-time-demo">
+							<time
+								id="numeric-time"
+								datetime="2026-07-26T11:11:11"
+							>11:11:11</time>
+							<time datetime="2026-07-26T20:00:00">20:00:00</time>
+						</div>
+						<table
+							id="numeric-table"
+							class="table-demo"
+						>
+							<thead>
+								<tr>
+									<th>Period</th>
+									<th>Value</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>2025</td>
+									<td>1,111.00</td>
+								</tr>
+								<tr>
+									<td>2026</td>
+									<td>8,888.00</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#numeric-code"
+						data-properties="font-variant-numeric"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#numeric-time"
+						data-properties="font-variant-numeric"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#numeric-table"
+						data-properties="font-variant-numeric"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
 						<code>*, ::before, ::after { background-repeat: no-repeat }</code>
 					</header>
 					<h3 class="specimen__title">Background repetition</h3>

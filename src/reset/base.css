@@ -56,6 +56,20 @@
 }
 
 /**
+ * Prefer numerical glyphs suited to their semantic context.
+ * 1. Use fixed-width numerals and distinguish zero from capital O in code.
+ * 2. Use fixed-width numerals for time values and tabular data.
+ *    https://drafts.csswg.org/css-fonts/#font-variant-numeric-prop
+ */
+:where(code) {
+	font-variant-numeric: tabular-nums slashed-zero; /* 1 */
+}
+
+:where(time, table) {
+	font-variant-numeric: tabular-nums; /* 2 */
+}
+
+/**
  * Keep controls from becoming taller than surrounding interactive UI.
  */
 :where(button, input, select, textarea, option, optgroup) {

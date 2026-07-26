@@ -505,6 +505,23 @@
 	border: 1px solid #718096;
 }
 
+.numeric-code-demo,
+.numeric-time-demo time {
+	padding: .25rem .4rem;
+	background: #fffaf0;
+	outline: 1px dashed #a0aec0;
+}
+
+.numeric-code-demo {
+	justify-self: start;
+}
+
+.numeric-time-demo {
+	display: block grid;
+	gap: .35rem;
+	justify-items: start;
+}
+
 #iframe-demo {
 	inline-size: 12rem;
 	block-size: 5rem;
