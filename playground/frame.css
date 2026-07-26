@@ -515,6 +515,28 @@
 	outline: 1px dashed #a0aec0;
 }
 
+.background-repeat-demo {
+	display: block grid;
+	inline-size: min(100%, 24rem);
+	block-size: 8rem;
+	padding: .75rem;
+	color: #282d33;
+	font-family: system-ui, sans-serif;
+	font-size: .75rem;
+	background-color: #fffaf0;
+	background-image: linear-gradient(135deg, #805ad5 0 50%, #f6e05e 50%);
+	background-size: 2.5rem 2.5rem;
+	border: 1px solid #a0aec0;
+	place-items: center;
+
+	> .background-repeat-demo__label {
+		padding: .3rem .5rem;
+		background: #ffffff;
+		border: 1px solid #d7d0c5;
+		border-radius: .25rem;
+	}
+}
+
 .shrink-demos {
 	display: block grid;
 	gap: .8rem;

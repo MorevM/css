@@ -1,15 +1,20 @@
 /**
- * Let flex and grid children shrink instead of forcing overflow.
- * https://css-tricks.com/preventing-a-grid-blowout/
+ * 1. Let flex and grid children shrink instead of forcing overflow.
+ *    https://css-tricks.com/preventing-a-grid-blowout/
+ * 2. Keep decorative background images from tiling by default.
+ *    https://wiki.csswg.org/ideas/mistakes/
  */
 *, ::before, ::after {
-	min-inline-size: 0;
+	min-inline-size: 0; /* 1 */
+	background-repeat: no-repeat; /* 2 */
 }
 
 /**
  * Establish document-wide typography and platform behavior.
  * 1. Use the system UI font stack.
- * 2. Set a readable default line height.
+ * 2. Set a readable default line height matching the value recommended by WCAG.
+ *    https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation
+ *    https://www.w3.org/WAI/WCAG22/Understanding/text-spacing
  * 3. Use the non-standard WebKit/Blink font-smoothing API on macOS; it has no unprefixed equivalent.
  *    https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-smooth
  * 4. Use the non-standard Firefox font-smoothing API on macOS; it has no unprefixed equivalent.
