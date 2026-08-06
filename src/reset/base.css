@@ -199,7 +199,7 @@
 		[role='button'],
 		[role='tab'],
 		[role='menuitem']
-	):not([aria-disabled='true'])
+	):not(:disabled, [aria-disabled='true'])
 ) {
 	cursor: pointer;
 }
