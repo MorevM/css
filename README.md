@@ -62,6 +62,35 @@ Using cascade layers is optional. Import the selected stylesheets before the des
 @import './design-system.css';
 ```
 
+### CDN
+
+The reset can be used without a package manager or build step. Load the complete minified stylesheet
+from a CDN before the design-system styles:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@morev/css/dist/reset.min.css">
+```
+
+Omitting the version resolves the current `latest` release. For reproducible deployments,
+pin a version by adding it after the package name: `@morev/css@0.1.0`.
+
+Every stylesheet is available in both regular and minified form:
+
+| Stylesheet                         | Regular                    | Minified                       |
+| ---------------------------------- | -------------------------- | ------------------------------ |
+| Complete reset (`core` and `base`) | `reset.css`                | `reset.min.css`                |
+| Core reset                         | `reset/core.css`           | `reset/core.min.css`           |
+| Design-system defaults             | `reset/base.css`           | `reset/base.min.css`           |
+| Optional reduced-motion policy     | `reset/reduced-motion.css` | `reset/reduced-motion.min.css` |
+
+With jsDelivr, append these paths after `https://cdn.jsdelivr.net/npm/@morev/css/dist/`.
+UNPKG supports the package export paths directly:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/@morev/css/reset.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@morev/css/reset/reduced-motion.min.css">
+```
+
 ## Browser support
 
 The package targets the moving [Baseline Widely Available](https://web.dev/baseline/) window
