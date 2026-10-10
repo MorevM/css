@@ -101,6 +101,79 @@
 					></output>
 				</article>
 
+				<!--
+					Details content box model reference:
+					https://kilianvalkhof.com/2026/css-html/id-like-to-have-a-universal-pseudo-selector-in-css/
+				-->
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--affected">Affected</span>
+						<code>::details-content { box-sizing: inherit }</code>
+					</header>
+					<h3 class="specimen__title">Details content box sizing</h3>
+					<p class="specimen__description">
+						The orange content container follows the details box model in the reset pane.
+						A local content-box override keeps the container content-box while ordinary children stay border-box.
+						The second child explicitly inherits the container's model.
+					</p>
+					<div class="specimen__stage details-box-model-stage">
+						<details
+							id="details-box-model"
+							class="details-box-model"
+							open
+						>
+							<summary>Default box model</summary>
+							<div class="details-box-model__sample">Ordinary child</div>
+							<div
+								id="details-inherited-box-model"
+								class="details-box-model__sample details-box-model__sample--inherit"
+							>Explicit inherit</div>
+						</details>
+						<details
+							id="details-local-box-model"
+							class="details-box-model details-box-model--content-box"
+							open
+						>
+							<summary>Local content-box override</summary>
+							<div
+								id="details-ordinary-box-model"
+								class="details-box-model__sample"
+							>Ordinary child</div>
+							<div
+								id="details-local-inherited-box-model"
+								class="details-box-model__sample details-box-model__sample--inherit"
+							>Explicit inherit</div>
+						</details>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#details-box-model"
+						data-pseudo="::details-content"
+						data-properties="box-sizing, inline-size, padding-inline-start, border-inline-start-width"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#details-inherited-box-model"
+						data-properties="box-sizing, inline-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#details-local-box-model"
+						data-pseudo="::details-content"
+						data-properties="box-sizing, inline-size, padding-inline-start, border-inline-start-width"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#details-ordinary-box-model"
+						data-properties="box-sizing, inline-size"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#details-local-inherited-box-model"
+						data-properties="box-sizing, inline-size"
+					></output>
+				</article>
+
 				<article class="specimen">
 					<header class="specimen__header">
 						<span class="status status--affected">Affected</span>
@@ -1542,7 +1615,7 @@
 				<article class="specimen">
 					<header class="specimen__header">
 						<span class="status status--optional">Preference-dependent</span>
-						<code>*, ::before, ::after, ::marker, ::backdrop</code>
+						<code>*, ::before, ::after, ::marker, ::backdrop, ::file-selector-button</code>
 					</header>
 					<h3 class="specimen__title">Animation and transition coverage</h3>
 					<p class="specimen__description">
@@ -1594,6 +1667,40 @@
 						data-computed-for="#motion-dialog"
 						data-pseudo="::backdrop"
 						data-properties="animation-duration, animation-delay, animation-iteration-count"
+					></output>
+				</article>
+
+				<article class="specimen">
+					<header class="specimen__header">
+						<span class="status status--optional">Preference-dependent</span>
+						<code>::details-content, ::file-selector-button</code>
+					</header>
+					<h3 class="specimen__title">Details content and file button transitions</h3>
+					<p class="specimen__description">
+						Toggle the disclosure to fade its content. Hover the file button to change its background and border.
+						Reduced motion shortens transitions on both pseudo-elements in the reset pane.
+					</p>
+					<div class="motion-stage">
+						<details id="motion-details" class="motion-details">
+							<summary>Toggle content transition</summary>
+							<div class="motion-details__content">This content fades when opened and closed.</div>
+						</details>
+						<label class="motion-file">
+							<span>Hover the file button</span>
+							<input id="motion-file-control" type="file" />
+						</label>
+					</div>
+					<output
+						class="computed-values"
+						data-computed-for="#motion-details"
+						data-pseudo="::details-content"
+						data-properties="transition-duration, transition-delay"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#motion-file-control"
+						data-pseudo="::file-selector-button"
+						data-properties="transition-duration, transition-delay"
 					></output>
 				</article>
 

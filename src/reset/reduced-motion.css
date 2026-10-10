@@ -5,13 +5,32 @@
  * 3. Shorten transitions.
  * 4. Shorten animations to a single iteration.
  */
-*, ::before, ::after, ::marker, ::backdrop {
+*, ::before, ::after, ::marker, ::backdrop, ::file-selector-button {
 	@media (prefers-reduced-motion: reduce) {
 		background-attachment: initial !important; /* 1 */
 		scroll-behavior: auto !important; /* 2 */
 		transition-duration: .01ms !important; /* 3 */
 		transition-delay: .01ms !important;
 		animation-duration: .01ms !important; /* 4 */
+		animation-delay: .01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}
+
+/**
+ * Apply the same motion policy to the browser-generated details content container.
+ * Keep it separate so unsupported selectors do not invalidate the general rule.
+ * Firefox 143 (16 September 2025) completed cross-browser support.
+ * https://www.mozilla.org/en-US/firefox/143.0/releasenotes/
+ * TODO(2028-03-16): Merge into the general selector list when support is Baseline Widely Available.
+ */
+::details-content {
+	@media (prefers-reduced-motion: reduce) {
+		background-attachment: initial !important;
+		scroll-behavior: auto !important;
+		transition-duration: .01ms !important;
+		transition-delay: .01ms !important;
+		animation-duration: .01ms !important;
 		animation-delay: .01ms !important;
 		animation-iteration-count: 1 !important;
 	}

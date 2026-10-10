@@ -263,6 +263,42 @@
 	border: .35rem solid #ed8936;
 }
 
+.details-box-model-stage {
+	column-gap: 3rem;
+}
+
+.details-box-model {
+	inline-size: 12rem;
+	max-inline-size: 100%;
+	outline: 1px dashed #a0aec0;
+
+	summary {
+		margin-block-end: .5rem;
+	}
+}
+
+.details-box-model--content-box {
+	box-sizing: content-box;
+}
+
+.details-box-model::details-content {
+	inline-size: 100%;
+	padding: .5rem;
+	background: #fffaf0;
+	border: .25rem solid #ed8936;
+}
+
+.details-box-model__sample {
+	inline-size: 100%;
+	padding: .4rem;
+	background: #edf2f7;
+	border: 1px solid #667eea;
+}
+
+.details-box-model__sample--inherit {
+	box-sizing: inherit;
+}
+
 .raw-flow {
 	inline-size: min(100%, 20rem);
 	outline: 1px dashed #a0aec0;
@@ -705,6 +741,57 @@
 .motion-marker li::marker {
 	color: #805ad5;
 	animation: playground-marker 1s linear infinite alternate;
+}
+
+.motion-details {
+	inline-size: 16rem;
+	max-inline-size: 100%;
+	border: 1px solid #9aa5b1;
+	border-radius: .3rem;
+
+	summary {
+		padding: .65rem;
+		cursor: pointer;
+	}
+}
+
+.motion-details::details-content {
+	opacity: 0;
+	transition: opacity 1.4s ease, content-visibility 1.4s allow-discrete;
+}
+
+.motion-details[open]::details-content {
+	opacity: 1;
+}
+
+.motion-details__content {
+	padding: .65rem;
+	background: #f3eefa;
+}
+
+.motion-file {
+	display: block grid;
+	gap: .4rem;
+	max-inline-size: 100%;
+
+	input {
+		max-inline-size: 100%;
+	}
+
+	input::file-selector-button {
+		padding: .45rem .65rem;
+		color: #ffffff;
+		font: inherit;
+		background: #52616f;
+		border: 1px solid #3e4c59;
+		border-radius: .3rem;
+		transition: background-color 1.4s ease, border-color 1.4s ease;
+	}
+
+	input::file-selector-button:hover {
+		background: #c05621;
+		border-color: #9c4221;
+	}
 }
 
 .motion-fixed-background {
