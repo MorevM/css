@@ -5,7 +5,7 @@
  * 3. Shorten transitions.
  * 4. Shorten animations to a single iteration.
  */
-*, ::before, ::after, ::marker, ::backdrop {
+*, ::before, ::after, ::marker, ::backdrop, ::file-selector-button {
 	@media (prefers-reduced-motion: reduce) {
 		background-attachment: initial !important; /* 1 */
 		scroll-behavior: auto !important; /* 2 */

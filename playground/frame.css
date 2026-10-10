@@ -769,6 +769,31 @@
 	background: #f3eefa;
 }
 
+.motion-file {
+	display: block grid;
+	gap: .4rem;
+	max-inline-size: 100%;
+
+	input {
+		max-inline-size: 100%;
+	}
+
+	input::file-selector-button {
+		padding: .45rem .65rem;
+		color: #ffffff;
+		font: inherit;
+		background: #52616f;
+		border: 1px solid #3e4c59;
+		border-radius: .3rem;
+		transition: background-color 1.4s ease, border-color 1.4s ease;
+	}
+
+	input::file-selector-button:hover {
+		background: #c05621;
+		border-color: #9c4221;
+	}
+}
+
 .motion-fixed-background {
 	display: block grid;
 	inline-size: 12rem;

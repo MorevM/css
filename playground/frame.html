@@ -1615,7 +1615,7 @@
 				<article class="specimen">
 					<header class="specimen__header">
 						<span class="status status--optional">Preference-dependent</span>
-						<code>*, ::before, ::after, ::marker, ::backdrop</code>
+						<code>*, ::before, ::after, ::marker, ::backdrop, ::file-selector-button</code>
 					</header>
 					<h3 class="specimen__title">Animation and transition coverage</h3>
 					<p class="specimen__description">
@@ -1673,23 +1673,33 @@
 				<article class="specimen">
 					<header class="specimen__header">
 						<span class="status status--optional">Preference-dependent</span>
-						<code>::details-content</code>
+						<code>::details-content, ::file-selector-button</code>
 					</header>
-					<h3 class="specimen__title">Details content transitions</h3>
+					<h3 class="specimen__title">Details content and file button transitions</h3>
 					<p class="specimen__description">
-						Toggle the disclosure to fade its content.
-						Reduced motion shortens transitions on the content container in the reset pane.
+						Toggle the disclosure to fade its content. Hover the file button to change its background and border.
+						Reduced motion shortens transitions on both pseudo-elements in the reset pane.
 					</p>
 					<div class="motion-stage">
 						<details id="motion-details" class="motion-details">
 							<summary>Toggle content transition</summary>
 							<div class="motion-details__content">This content fades when opened and closed.</div>
 						</details>
+						<label class="motion-file">
+							<span>Hover the file button</span>
+							<input id="motion-file-control" type="file" />
+						</label>
 					</div>
 					<output
 						class="computed-values"
 						data-computed-for="#motion-details"
 						data-pseudo="::details-content"
+						data-properties="transition-duration, transition-delay"
+					></output>
+					<output
+						class="computed-values"
+						data-computed-for="#motion-file-control"
+						data-pseudo="::file-selector-button"
 						data-properties="transition-duration, transition-delay"
 					></output>
 				</article>
