@@ -263,6 +263,42 @@
 	border: .35rem solid #ed8936;
 }
 
+.details-box-model-stage {
+	column-gap: 3rem;
+}
+
+.details-box-model {
+	inline-size: 12rem;
+	max-inline-size: 100%;
+	outline: 1px dashed #a0aec0;
+
+	summary {
+		margin-block-end: .5rem;
+	}
+}
+
+.details-box-model--content-box {
+	box-sizing: content-box;
+}
+
+.details-box-model::details-content {
+	inline-size: 100%;
+	padding: .5rem;
+	background: #fffaf0;
+	border: .25rem solid #ed8936;
+}
+
+.details-box-model__sample {
+	inline-size: 100%;
+	padding: .4rem;
+	background: #edf2f7;
+	border: 1px solid #667eea;
+}
+
+.details-box-model__sample--inherit {
+	box-sizing: inherit;
+}
+
 .raw-flow {
 	inline-size: min(100%, 20rem);
 	outline: 1px dashed #a0aec0;

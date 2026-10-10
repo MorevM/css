@@ -15,6 +15,18 @@
 }
 
 /**
+ * Let the details content container follow its originating element's box model.
+ * https://kilianvalkhof.com/2026/css-html/id-like-to-have-a-universal-pseudo-selector-in-css/
+ * Keep it separate so unsupported selectors do not invalidate the other pseudo-element rules.
+ * Firefox 143 (16 September 2025) completed cross-browser support.
+ * https://www.mozilla.org/en-US/firefox/143.0/releasenotes/
+ * TODO(2028-03-16): Merge with `::before` and `::after` when support is Baseline Widely Available.
+ */
+::details-content {
+	box-sizing: inherit;
+}
+
+/**
  * Remove browser-provided spacing everywhere.
  */
 * {
