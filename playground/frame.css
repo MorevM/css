@@ -743,6 +743,32 @@
 	animation: playground-marker 1s linear infinite alternate;
 }
 
+.motion-details {
+	inline-size: 16rem;
+	max-inline-size: 100%;
+	border: 1px solid #9aa5b1;
+	border-radius: .3rem;
+
+	summary {
+		padding: .65rem;
+		cursor: pointer;
+	}
+}
+
+.motion-details::details-content {
+	opacity: 0;
+	transition: opacity 1.4s ease, content-visibility 1.4s allow-discrete;
+}
+
+.motion-details[open]::details-content {
+	opacity: 1;
+}
+
+.motion-details__content {
+	padding: .65rem;
+	background: #f3eefa;
+}
+
 .motion-fixed-background {
 	display: block grid;
 	inline-size: 12rem;

@@ -18,6 +18,25 @@
 }
 
 /**
+ * Apply the same motion policy to the browser-generated details content container.
+ * Keep it separate so unsupported selectors do not invalidate the general rule.
+ * Firefox 143 (16 September 2025) completed cross-browser support.
+ * https://www.mozilla.org/en-US/firefox/143.0/releasenotes/
+ * TODO(2028-03-16): Merge into the general selector list when support is Baseline Widely Available.
+ */
+::details-content {
+	@media (prefers-reduced-motion: reduce) {
+		background-attachment: initial !important;
+		scroll-behavior: auto !important;
+		transition-duration: .01ms !important;
+		transition-delay: .01ms !important;
+		animation-duration: .01ms !important;
+		animation-delay: .01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}
+
+/**
  * Restrict motion in the browser-generated View Transition tree.
  * https://drafts.csswg.org/css-view-transitions-1/#view-transition-pseudo-tree
  */
